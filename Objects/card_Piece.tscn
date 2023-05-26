@@ -1,0 +1,24 @@
+[gd_scene load_steps=7 format=3 uid="uid://doowr667gqcfl"]
+
+[ext_resource type="Script" path="res://Scripts/CardPiece.gd" id="1_lbiud"]
+[ext_resource type="Shader" uid="uid://cwga6pctd18f1" path="res://Sprites/TransparentShader.tres" id="2_tawla"]
+[ext_resource type="Texture2D" uid="uid://b4cjymflynd47" path="res://Sprites/Cards/Borders1.png" id="3_35nvr"]
+[ext_resource type="PackedScene" uid="uid://b4l6ddyxnnf7u" path="res://Objects/card.tscn" id="4_rk2ko"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_4id68"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dsklm"]
+render_priority = 0
+shader = ExtResource("2_tawla")
+shader_parameter/Texture = ExtResource("3_35nvr")
+
+[node name="CardPiece" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0581, 0)
+script = ExtResource("1_lbiud")
+
+[node name="Border" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_4id68")
+skeleton = NodePath("../../Boardblend")
+surface_material_override/0 = SubResource("ShaderMaterial_dsklm")
+
+[node name="Card" parent="." instance=ExtResource("4_rk2ko")]

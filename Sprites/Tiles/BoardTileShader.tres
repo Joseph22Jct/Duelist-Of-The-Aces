@@ -31,10 +31,11 @@ parameter_name = "BGText"
 
 [sub_resource type="VisualShaderNodeTexture2DParameter" id="VisualShaderNodeTexture2DParameter_k6s66"]
 parameter_name = "MainText"
+texture_filter = 1
 
 [resource]
 code = "shader_type spatial;
-uniform sampler2D MainText;
+uniform sampler2D MainText : filter_nearest;
 uniform sampler2D BGText;
 
 
@@ -91,7 +92,7 @@ void fragment() {
 
 }
 "
-graph_offset = Vector2(-553.372, 336.252)
+graph_offset = Vector2(-614.745, 183.63)
 nodes/fragment/0/position = Vector2(1060, 40)
 nodes/fragment/2/node = SubResource("VisualShaderNodeTexture_6th8x")
 nodes/fragment/2/position = Vector2(-80, 40)

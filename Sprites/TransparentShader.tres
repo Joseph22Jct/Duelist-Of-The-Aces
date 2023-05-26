@@ -1,0 +1,38 @@
+[gd_resource type="VisualShader" load_steps=3 format=3 uid="uid://cwga6pctd18f1"]
+
+[sub_resource type="VisualShaderNodeTexture2DParameter" id="VisualShaderNodeTexture2DParameter_ierwb"]
+parameter_name = "Texture"
+texture_filter = 1
+
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_kkpm7"]
+output_port_for_preview = 0
+expanded_output_ports = [0]
+source = 5
+
+[resource]
+code = "shader_type spatial;
+uniform sampler2D Texture : filter_nearest;
+
+
+
+void fragment() {
+	vec4 n_out3p0;
+// Texture2D:3
+	n_out3p0 = texture(Texture, UV);
+	float n_out3p4 = n_out3p0.a;
+
+
+// Output:0
+	ALBEDO = vec3(n_out3p0.xyz);
+	ALPHA = n_out3p4;
+
+
+}
+"
+graph_offset = Vector2(-55.4882, 93.4881)
+nodes/fragment/0/position = Vector2(800, 140)
+nodes/fragment/2/node = SubResource("VisualShaderNodeTexture2DParameter_ierwb")
+nodes/fragment/2/position = Vector2(-80, 180)
+nodes/fragment/3/node = SubResource("VisualShaderNodeTexture_kkpm7")
+nodes/fragment/3/position = Vector2(340, 180)
+nodes/fragment/connections = PackedInt32Array(2, 0, 3, 2, 3, 0, 0, 0, 3, 4, 0, 1)

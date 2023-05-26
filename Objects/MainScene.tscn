@@ -1,9 +1,11 @@
-[gd_scene load_steps=57 format=3 uid="uid://im68qk7cc318"]
+[gd_scene load_steps=62 format=3 uid="uid://7b23dkagou20"]
 
 [ext_resource type="Script" path="res://Scripts/GameManager.gd" id="1_3px8p"]
 [ext_resource type="PackedScene" uid="uid://cgw47buhjmb5u" path="res://Objects/Board.tscn" id="1_6ql8c"]
 [ext_resource type="Script" path="res://Scripts/BoardManager.gd" id="2_admdy"]
+[ext_resource type="PackedScene" uid="uid://doowr667gqcfl" path="res://Objects/card_Piece.tscn" id="3_eyui3"]
 [ext_resource type="Texture2D" uid="uid://vwgifl2kk2b3" path="res://Sprites/Tiles/Boards10.png" id="4_5v2yu"]
+[ext_resource type="PackedScene" uid="uid://d1g45ixtt03wc" path="res://Objects/board_tile.tscn" id="4_smp0i"]
 [ext_resource type="Script" path="res://Scripts/BoardTile.gd" id="5_apq12"]
 [ext_resource type="Texture2D" uid="uid://vp1014wtbpv4" path="res://Sprites/Tiles/Boards3.png" id="5_ou5gg"]
 [ext_resource type="Texture2D" uid="uid://h7vi3xqi7b4p" path="res://Sprites/Tiles/Boards11.png" id="7_gdeva"]
@@ -16,6 +18,8 @@
 [ext_resource type="Texture2D" uid="uid://c3ociriqhtrsp" path="res://Sprites/Tiles/Boards13.png" id="14_yec6t"]
 [ext_resource type="Texture2D" uid="uid://bpvu2dhg6g5bn" path="res://Sprites/Tiles/Boards6.png" id="15_wa0r6"]
 [ext_resource type="Texture2D" uid="uid://bv20rxpidwbtl" path="res://Sprites/Tiles/Boards7.png" id="16_gp60u"]
+[ext_resource type="PackedScene" uid="uid://cwaxyljhavuqu" path="res://Objects/cursor_manager.tscn" id="19_c8hgr"]
+[ext_resource type="Script" path="res://Scripts/CardManager.gd" id="19_wkqhb"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_ptum4"]
 
@@ -113,7 +117,7 @@ void fragment() {
 
 }
 "
-graph_offset = Vector2(-553.372, 336.252)
+graph_offset = Vector2(-198.668, 72.8267)
 nodes/fragment/0/position = Vector2(1060, 40)
 nodes/fragment/2/node = SubResource("VisualShaderNodeTexture_wcy8x")
 nodes/fragment/2/position = Vector2(-80, 40)
@@ -132,12 +136,6 @@ nodes/fragment/8/position = Vector2(-320, 660)
 nodes/fragment/9/node = SubResource("VisualShaderNodeTexture2DParameter_uegai")
 nodes/fragment/9/position = Vector2(-480, 180)
 nodes/fragment/connections = PackedInt32Array(2, 4, 4, 0, 3, 0, 4, 3, 2, 0, 5, 0, 4, 0, 5, 2, 5, 0, 0, 0, 6, 0, 3, 0, 7, 0, 6, 2, 8, 0, 3, 2, 9, 0, 2, 2)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_l52bj"]
-render_priority = 0
-shader = SubResource("VisualShader_rkxed")
-shader_parameter/MainText = ExtResource("5_ou5gg")
-shader_parameter/BGText = ExtResource("4_5v2yu")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ayaps"]
 render_priority = 0
@@ -314,10 +312,11 @@ parameter_name = "BGText"
 
 [sub_resource type="VisualShaderNodeTexture2DParameter" id="VisualShaderNodeTexture2DParameter_uj728"]
 parameter_name = "MainText"
+texture_filter = 1
 
 [sub_resource type="VisualShader" id="VisualShader_qiy1q"]
 code = "shader_type spatial;
-uniform sampler2D MainText;
+uniform sampler2D MainText : filter_nearest;
 uniform sampler2D BGText;
 
 
@@ -374,7 +373,7 @@ void fragment() {
 
 }
 "
-graph_offset = Vector2(-553.372, 336.252)
+graph_offset = Vector2(-421.184, 125.036)
 nodes/fragment/0/position = Vector2(1060, 40)
 nodes/fragment/2/node = SubResource("VisualShaderNodeTexture_g1ynb")
 nodes/fragment/2/position = Vector2(-80, 40)
@@ -400,22 +399,28 @@ shader = SubResource("VisualShader_qiy1q")
 shader_parameter/MainText = ExtResource("16_gp60u")
 shader_parameter/BGText = ExtResource("11_k5nye")
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_l52bj"]
+render_priority = 0
+shader = SubResource("VisualShader_rkxed")
+shader_parameter/MainText = ExtResource("5_ou5gg")
+shader_parameter/BGText = ExtResource("4_5v2yu")
+
+[sub_resource type="Environment" id="Environment_6dbpa"]
+
 [node name="GameManager" type="Node3D"]
 script = ExtResource("1_3px8p")
 
 [node name="BoardManager" type="Node3D" parent="."]
 script = ExtResource("2_admdy")
 
+[node name="CardPiece" parent="BoardManager" instance=ExtResource("3_eyui3")]
+
 [node name="Boardblend" parent="BoardManager" instance=ExtResource("1_6ql8c")]
 
 [node name="Testing" type="Node3D" parent="BoardManager"]
+visible = false
 
-[node name="BoardTile" type="MeshInstance3D" parent="BoardManager/Testing"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
-mesh = SubResource("PlaneMesh_ptum4")
-skeleton = NodePath("../..")
-surface_material_override/0 = SubResource("ShaderMaterial_l52bj")
-script = ExtResource("5_apq12")
+[node name="BoardTile" parent="BoardManager/Testing" instance=ExtResource("4_smp0i")]
 
 [node name="BoardTile2" type="MeshInstance3D" parent="BoardManager/Testing"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0.6, 0)
@@ -753,4 +758,20 @@ skeleton = NodePath("../../..")
 surface_material_override/0 = SubResource("ShaderMaterial_s1g4o")
 script = ExtResource("5_apq12")
 
+[node name="CursorManager" parent="BoardManager" instance=ExtResource("19_c8hgr")]
+
+[node name="CardManager" type="Node3D" parent="BoardManager"]
+script = ExtResource("19_wkqhb")
+
+[node name="Tiles" type="Node3D" parent="BoardManager"]
+
 [node name="Camera" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 7, 10)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_6dbpa")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.79978, 0)
+light_size = 10.0
+omni_range = 102.933

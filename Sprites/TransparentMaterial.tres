@@ -1,0 +1,9 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://c6sdk13jxrhjv"]
+
+[ext_resource type="Shader" uid="uid://cwga6pctd18f1" path="res://Sprites/TransparentShader.tres" id="1_jnyqv"]
+[ext_resource type="Texture2D" uid="uid://djb0lnlv6vm06" path="res://CursorTexture.png" id="2_x7rgk"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_jnyqv")
+shader_parameter/Texture = ExtResource("2_x7rgk")

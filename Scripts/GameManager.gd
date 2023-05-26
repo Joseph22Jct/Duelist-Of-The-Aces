@@ -13,6 +13,6 @@ func _process(delta):
 	pass
 
 func Main():
-	print("OK!")
+	#print("OK!")
 	pass
 	

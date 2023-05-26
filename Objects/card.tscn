@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://b4l6ddyxnnf7u"]
+
+[ext_resource type="Shader" uid="uid://cwga6pctd18f1" path="res://Sprites/TransparentShader.tres" id="1_4dc1p"]
+[ext_resource type="Texture2D" uid="uid://cfbauo6cep76g" path="res://Sprites/Cards/Cards.png" id="2_7fjpb"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_4id68"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_21gtw"]
+render_priority = 0
+shader = ExtResource("1_4dc1p")
+shader_parameter/Texture = ExtResource("2_7fjpb")
+
+[node name="Card" type="MeshInstance3D"]
+mesh = SubResource("PlaneMesh_4id68")
+skeleton = NodePath("../../Boardblend")
+surface_material_override/0 = SubResource("ShaderMaterial_21gtw")
+
+[node name="CardFaceUp" type="MeshInstance3D" parent="."]
+transform = Transform3D(-1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("PlaneMesh_4id68")
+skeleton = NodePath("../../Boardblend")
+surface_material_override/0 = SubResource("ShaderMaterial_21gtw")

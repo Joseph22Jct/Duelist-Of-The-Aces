@@ -1,0 +1,135 @@
+[gd_scene load_steps=17 format=3 uid="uid://d1g45ixtt03wc"]
+
+[ext_resource type="Texture2D" uid="uid://vwgifl2kk2b3" path="res://Sprites/Tiles/Boards10.png" id="1_4c61i"]
+[ext_resource type="Texture2D" uid="uid://bv20rxpidwbtl" path="res://Sprites/Tiles/Boards7.png" id="2_m40ch"]
+[ext_resource type="Script" path="res://Scripts/BoardTile.gd" id="3_sdljq"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_ptum4"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_5ituw"]
+load_path = "res://.godot/imported/Boards1.png-0d908caa2a3cf13720d5d0b92f6c49a8.ctex"
+
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_wcy8x"]
+output_port_for_preview = 0
+expanded_output_ports = [0]
+source = 5
+texture = SubResource("CompressedTexture2D_5ituw")
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_6owim"]
+load_path = "res://.godot/imported/Boards8.png-674dc600c7f3f36e560f6945bdfa1126.ctex"
+
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_pyy06"]
+source = 5
+texture = SubResource("CompressedTexture2D_6owim")
+
+[sub_resource type="VisualShaderNodeIf" id="VisualShaderNodeIf_my2kt"]
+
+[sub_resource type="VisualShaderNodeMultiplyAdd" id="VisualShaderNodeMultiplyAdd_7oujk"]
+output_port_for_preview = 0
+default_input_values = [0, Vector3(0, 0, 0), 1, Vector3(1, 1, 1), 2, Vector3(0, 0, 0)]
+op_type = 2
+
+[sub_resource type="VisualShaderNodeUVFunc" id="VisualShaderNodeUVFunc_wax1b"]
+default_input_values = [1, Vector2(-0.2, -0.2), 2, Vector2(0, 0)]
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_ix6cv"]
+input_name = "time"
+
+[sub_resource type="VisualShaderNodeTexture2DParameter" id="VisualShaderNodeTexture2DParameter_i3fkj"]
+parameter_name = "BGText"
+
+[sub_resource type="VisualShaderNodeTexture2DParameter" id="VisualShaderNodeTexture2DParameter_uegai"]
+parameter_name = "MainText"
+texture_filter = 1
+
+[sub_resource type="VisualShader" id="VisualShader_rkxed"]
+code = "shader_type spatial;
+uniform sampler2D MainText : filter_nearest;
+uniform sampler2D BGText;
+
+
+
+void fragment() {
+	vec4 n_out2p0;
+// Texture2D:2
+	n_out2p0 = texture(MainText, UV);
+	float n_out2p4 = n_out2p0.a;
+
+
+// Input:7
+	float n_out7p0 = TIME;
+
+
+// UVFunc:6
+	vec2 n_in6p1 = vec2(-0.20000, -0.20000);
+	vec2 n_out6p0 = vec2(n_out7p0) * n_in6p1 + UV;
+
+
+	vec4 n_out3p0;
+// Texture2D:3
+	n_out3p0 = texture(BGText, n_out6p0);
+
+
+	vec3 n_out4p0;
+// If:4
+	float n_in4p1 = 0.00000;
+	float n_in4p2 = 0.00001;
+	vec3 n_in4p4 = vec3(0.00000, 0.00000, 0.00000);
+	vec3 n_in4p5 = vec3(0.00000, 0.00000, 0.00000);
+	if(abs(n_out2p4 - n_in4p1) < n_in4p2)
+	{
+		n_out4p0 = vec3(n_out3p0.xyz);
+	}
+	else if(n_out2p4 < n_in4p1)
+	{
+		n_out4p0 = n_in4p5;
+	}
+	else
+	{
+		n_out4p0 = n_in4p4;
+	}
+
+
+// MultiplyAdd:5
+	vec3 n_in5p1 = vec3(1.00000, 1.00000, 1.00000);
+	vec3 n_out5p0 = fma(vec3(n_out2p0.xyz), n_in5p1, n_out4p0);
+
+
+// Output:0
+	ALBEDO = n_out5p0;
+
+
+}
+"
+graph_offset = Vector2(-494.886, 40.7197)
+nodes/fragment/0/position = Vector2(1060, 40)
+nodes/fragment/2/node = SubResource("VisualShaderNodeTexture_wcy8x")
+nodes/fragment/2/position = Vector2(-80, 40)
+nodes/fragment/3/node = SubResource("VisualShaderNodeTexture_pyy06")
+nodes/fragment/3/position = Vector2(280, 460)
+nodes/fragment/4/node = SubResource("VisualShaderNodeIf_my2kt")
+nodes/fragment/4/position = Vector2(580, 360)
+nodes/fragment/5/node = SubResource("VisualShaderNodeMultiplyAdd_7oujk")
+nodes/fragment/5/position = Vector2(800, 200)
+nodes/fragment/6/node = SubResource("VisualShaderNodeUVFunc_wax1b")
+nodes/fragment/6/position = Vector2(0, 560)
+nodes/fragment/7/node = SubResource("VisualShaderNodeInput_ix6cv")
+nodes/fragment/7/position = Vector2(-280, 580)
+nodes/fragment/8/node = SubResource("VisualShaderNodeTexture2DParameter_i3fkj")
+nodes/fragment/8/position = Vector2(-320, 660)
+nodes/fragment/9/node = SubResource("VisualShaderNodeTexture2DParameter_uegai")
+nodes/fragment/9/position = Vector2(-480, 180)
+nodes/fragment/connections = PackedInt32Array(2, 4, 4, 0, 3, 0, 4, 3, 2, 0, 5, 0, 4, 0, 5, 2, 5, 0, 0, 0, 6, 0, 3, 0, 7, 0, 6, 2, 8, 0, 3, 2, 9, 0, 2, 2)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tckhw"]
+render_priority = 0
+shader = SubResource("VisualShader_rkxed")
+shader_parameter/MainText = ExtResource("2_m40ch")
+shader_parameter/BGText = ExtResource("1_4c61i")
+
+[node name="BoardTile" type="MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
+mesh = SubResource("PlaneMesh_ptum4")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("ShaderMaterial_tckhw")
+script = ExtResource("3_sdljq")

@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://dv8cnt50u64if"]
+
+[ext_resource type="PackedScene" uid="uid://c121h3muei5xc" path="res://CursorBlend.glb" id="1_pyg4k"]
+[ext_resource type="Material" uid="uid://c6sdk13jxrhjv" path="res://Sprites/TransparentMaterial.tres" id="2_bkebp"]
+
+[node name="CursorBlend" instance=ExtResource("1_pyg4k")]
+
+[node name="Cone" parent="." index="0"]
+surface_material_override/0 = ExtResource("2_bkebp")

@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://cwaxyljhavuqu"]
+
+[ext_resource type="Script" path="res://Scripts/CursorManager.gd" id="1_8k470"]
+[ext_resource type="PackedScene" uid="uid://dv8cnt50u64if" path="res://Sprites/cursor_blend.tscn" id="2_6ul51"]
+
+[node name="CursorManager" type="Node3D"]
+script = ExtResource("1_8k470")
+
+[node name="CursorBlend" parent="." instance=ExtResource("2_6ul51")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 3, 0)
