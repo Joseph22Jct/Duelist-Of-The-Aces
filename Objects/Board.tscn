@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://cgw47buhjmb5u"]
+
+[ext_resource type="PackedScene" uid="uid://ceb2o8aywdsjm" path="res://Boardblend.glb" id="1_50lfb"]
+
+[node name="Boardblend" instance=ExtResource("1_50lfb")]
+
+[node name="Diamond" parent="." index="1"]
+transform = Transform3D(1.543, 1.543, -0.707107, -2.18213, 2.18213, 0, 1.543, 1.543, 0.707107, 9.94881, 2.94345, -9.66976)
+
+[node name="Spade" parent="." index="2"]
+transform = Transform3D(1.58463, 0, 0.707107, 0, 2.221, 0, -1.58463, 0, 0.707107, -10.0637, 1.75998, -10)
+
+[node name="Club" parent="." index="3"]
+transform = Transform3D(1.41421, 0, 1.41421, 0, 2, 0, -1.41421, 0, 1.41421, 10.1123, 2.23904, 10)
+
+[node name="Sphere" parent="." index="4"]
+transform = Transform3D(2.12132, 0, -2.12132, 0, 3, 0, 2.12132, 0, 2.12132, -9.8137, 4.44744, 10)

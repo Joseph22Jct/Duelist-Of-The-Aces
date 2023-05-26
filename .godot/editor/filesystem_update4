@@ -1,0 +1,5 @@
+res://Objects/Board.tscn
+res://Objects/MainScene.tscn
+res://Objects/GameManager.gd
+res://Sprites/Tiles/BoardTileShader.tres
+res://Sprites/Tiles/BoardTileMat.tres

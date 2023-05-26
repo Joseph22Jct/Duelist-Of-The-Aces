@@ -11,5 +11,6 @@ config_version=5
 [application]
 
 config/name="Duelist-Of-The-Aces"
+run/main_scene="res://Objects/MainScene.tscn"
 config/features=PackedStringArray("4.0", "Forward Plus")
 config/icon="res://icon.svg"
