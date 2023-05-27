@@ -7,28 +7,54 @@ var CardPiece = preload("res://Objects/card_Piece.tscn")
 var Deck1 = []
 var Deck2 = []
 
+var Hand1 = []
+var Hand2 = []
+
 func _ready():
 	Globals.CardManager = self
+	await get_tree().process_frame
+	CreateDecks()
 	
 func CreateDecks():
-	for type in range(4):
-		for number in range(13):
-			var C:CardBase = Card.new()
+	
+	for type in range(5):
+		if(type == 0):
+			continue
+		for number in range(14):
+			if number == 0:
+				continue
+			var C:CardBase = CardBase.new()
 			C.type = type
 			C.number = number
 			Deck1.append(C)
-			C = Card.new()
+			C = CardBase.new()
 			C.type = type
 			C.number = number
 			Deck2.append(C)
-			
+	Globals.GameManager.UpdateScore(1,null,null, len(Deck1))
+	Globals.GameManager.UpdateScore(2,null,null, len(Deck2))
+	FillHands(1)
+	FillHands(2)
 	pass
+	
+func FillHands(which):
+	if which == 1:
+		
+		while (len(Hand1)<5 and len(Deck1 )> 0):
+			Hand1.append(DrawCard(1))
+			pass
+	else:
+		while (len(Hand2)<5 and len(Deck2 )> 0):
+			Hand2.append(DrawCard(2))
+			pass
 	
 func DrawCard(which):
 	randomize()
 	if which == 1:
+		Globals.GameManager.UpdateScore(1,null,null, -1)
 		return Deck1.pop_at(randi()%Deck1.size())
 	else:
+		Globals.GameManager.UpdateScore(2,null,null, -1)
 		return Deck2.pop_at(randi()%Deck2.size())
 	pass
 

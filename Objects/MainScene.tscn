@@ -1,17 +1,14 @@
-[gd_scene load_steps=19 format=3 uid="uid://6srte17tc7yn"]
+[gd_scene load_steps=14 format=3 uid="uid://6srte17tc7yn"]
 
 [ext_resource type="Script" path="res://Scripts/GameManager.gd" id="1_3px8p"]
 [ext_resource type="PackedScene" uid="uid://cgw47buhjmb5u" path="res://Objects/Board.tscn" id="1_6ql8c"]
 [ext_resource type="Script" path="res://Scripts/BoardManager.gd" id="2_admdy"]
 [ext_resource type="Script" path="res://Scripts/Camera.gd" id="6_lhvja"]
+[ext_resource type="PackedScene" uid="uid://cdbjt1ss1obq2" path="res://Objects/ui_manager.tscn" id="8_njx32"]
+[ext_resource type="PackedScene" uid="uid://rtnssltdn6yx" path="res://Objects/sound_manager.tscn" id="14_dqm0h"]
 [ext_resource type="PackedScene" uid="uid://cwaxyljhavuqu" path="res://Objects/cursor_manager.tscn" id="19_c8hgr"]
 [ext_resource type="Script" path="res://Scripts/CardManager.gd" id="19_wkqhb"]
-[ext_resource type="Script" path="res://Scripts/UIManager.gd" id="21_30oib"]
 [ext_resource type="Texture2D" uid="uid://8t8v2hrwwtyt" path="res://Sprites/skybox.png" id="21_flwys"]
-[ext_resource type="Texture2D" uid="uid://b7yaht6kautop" path="res://Sprites/UI/Scores3.png" id="22_p0is1"]
-[ext_resource type="Texture2D" uid="uid://crqxrhmlt8njh" path="res://Sprites/UI/Scores1.png" id="22_vrqkk"]
-[ext_resource type="Texture2D" uid="uid://bqvda6jucyo0u" path="res://Sprites/UI/Scores2.png" id="23_qxbu1"]
-[ext_resource type="FontFile" uid="uid://cxsqcm26sdou4" path="res://Sprites/JosFont.ttf" id="24_5h4dk"]
 [ext_resource type="Script" path="res://Scripts/Pathfinder.gd" id="28_flbwc"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_l2ouy"]
@@ -25,10 +22,6 @@ background_mode = 2
 sky = SubResource("Sky_1ruog")
 ambient_light_source = 2
 ambient_light_color = Color(1, 1, 1, 1)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_4p8jf"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_sk5kr"]
 
 [node name="GameManager" type="Node3D"]
 script = ExtResource("1_3px8p")
@@ -54,150 +47,9 @@ script = ExtResource("6_lhvja")
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_6dbpa")
 
-[node name="UIManager" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 1280.0
-offset_bottom = 720.0
-script = ExtResource("21_30oib")
-
-[node name="Scores" type="Control" parent="UIManager"]
-anchors_preset = 0
-offset_right = 1280.0
-offset_bottom = 720.0
-
-[node name="ScoreP1" type="Control" parent="UIManager/Scores"]
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="Sprite2D" type="Sprite2D" parent="UIManager/Scores/ScoreP1"]
-modulate = Color(1, 0.882353, 0.831373, 1)
-material = SubResource("ShaderMaterial_4p8jf")
-position = Vector2(125, 80)
-scale = Vector2(2, 2)
-texture = ExtResource("22_p0is1")
-
-[node name="Border" type="TextureRect" parent="UIManager/Scores/ScoreP1"]
-material = SubResource("ShaderMaterial_sk5kr")
-layout_mode = 0
-offset_right = 125.0
-offset_bottom = 80.0
-scale = Vector2(2, 2)
-texture = ExtResource("22_vrqkk")
-
-[node name="Scores" type="Control" parent="UIManager/Scores/ScoreP1"]
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="Cards" type="Label" parent="UIManager/Scores/ScoreP1/Scores"]
-layout_mode = 0
-offset_left = 189.0
-offset_top = 88.0
-offset_right = 229.0
-offset_bottom = 111.0
-scale = Vector2(2, 2)
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 4
-theme_override_fonts/font = ExtResource("24_5h4dk")
-text = "40"
-
-[node name="AP" type="Label" parent="UIManager/Scores/ScoreP1/Scores"]
-layout_mode = 0
-offset_left = 189.0
-offset_top = 53.0
-offset_right = 229.0
-offset_bottom = 76.0
-scale = Vector2(2, 2)
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 4
-theme_override_fonts/font = ExtResource("24_5h4dk")
-text = "12
-"
-
-[node name="Health" type="Label" parent="UIManager/Scores/ScoreP1/Scores"]
-layout_mode = 0
-offset_left = 189.0
-offset_top = 20.0
-offset_right = 229.0
-offset_bottom = 43.0
-scale = Vector2(2, 2)
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 4
-theme_override_fonts/font = ExtResource("24_5h4dk")
-text = "20"
-
-[node name="ScoreP2" type="Control" parent="UIManager/Scores"]
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="Sprite2D" type="Sprite2D" parent="UIManager/Scores/ScoreP2"]
-modulate = Color(0.831373, 0.870588, 1, 1)
-material = SubResource("ShaderMaterial_4p8jf")
-position = Vector2(1155, 80)
-scale = Vector2(2, 2)
-texture = ExtResource("22_p0is1")
-
-[node name="Border" type="TextureRect" parent="UIManager/Scores/ScoreP2"]
-material = SubResource("ShaderMaterial_sk5kr")
-layout_mode = 0
-offset_left = 1030.0
-offset_right = 1155.0
-offset_bottom = 80.0
-scale = Vector2(2, 2)
-texture = ExtResource("23_qxbu1")
-
-[node name="Scores" type="Control" parent="UIManager/Scores/ScoreP2"]
-layout_mode = 3
-anchors_preset = 0
-offset_left = 1030.0
-offset_right = 1070.0
-offset_bottom = 40.0
-
-[node name="Cards" type="Label" parent="UIManager/Scores/ScoreP2/Scores"]
-layout_mode = 0
-offset_left = 189.0
-offset_top = 88.0
-offset_right = 229.0
-offset_bottom = 111.0
-scale = Vector2(2, 2)
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 4
-theme_override_fonts/font = ExtResource("24_5h4dk")
-text = "40"
-
-[node name="AP" type="Label" parent="UIManager/Scores/ScoreP2/Scores"]
-layout_mode = 0
-offset_left = 189.0
-offset_top = 53.0
-offset_right = 229.0
-offset_bottom = 76.0
-scale = Vector2(2, 2)
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 4
-theme_override_fonts/font = ExtResource("24_5h4dk")
-text = "12
-"
-
-[node name="Health" type="Label" parent="UIManager/Scores/ScoreP2/Scores"]
-layout_mode = 0
-offset_left = 189.0
-offset_top = 20.0
-offset_right = 229.0
-offset_bottom = 43.0
-scale = Vector2(2, 2)
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 4
-theme_override_fonts/font = ExtResource("24_5h4dk")
-text = "20"
+[node name="UIManager" parent="." instance=ExtResource("8_njx32")]
 
 [node name="Pathfinder" type="Node3D" parent="."]
 script = ExtResource("28_flbwc")
+
+[node name="SoundManager" parent="." instance=ExtResource("14_dqm0h")]

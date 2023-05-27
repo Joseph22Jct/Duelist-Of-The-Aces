@@ -1,6 +1,6 @@
 extends MeshInstance3D
 
-
+class_name Card
 # Called when the node enters the scene tree for the first time.
 var type 
 var num 

@@ -1,9 +1,11 @@
-Node3D
-MeshInstance3D
 Label
-Control
-Sprite2D
 TextureRect
+Control
+Node3D
+AudioStreamPlayer
+AudioStreamPlayer3D
+MeshInstance3D
+Sprite2D
 WorldEnvironment
 OmniLight3D
 Camera3D

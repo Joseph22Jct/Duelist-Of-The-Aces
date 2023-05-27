@@ -4,7 +4,9 @@ class_name BoardTile
 
 var TerrainType = 0
 var BPos = []
-var Actionable = false ##Can move or summon
+var Actionable = false
+var Summon = false ##Can move or summon
+var Movement = false
 
 var highlightTile = preload("res://Sprites/highlight cursor.png")
 var summonTile = preload("res://Sprites/summonTile.png")
@@ -53,11 +55,33 @@ func SetType(Type):
 	print("Type Set to: " + str(Type)+ " at tile: "+ str(BPos))
 			
 # Called when the node enters the scene tree for the first time.
-func CheckHighlight(oldpos, curpos):
+func CheckHighlight(oldpos = null, curpos= null):
+	if(oldpos == null):
+		oldpos = Globals.Cursor.oldPos
+		pass
+	
+	if(curpos == null):
+		curpos = Globals.Cursor.curPos
+		pass
+		
+	if(Summon):
+		$"Highlight-offcursor".visible = false
+		$Highight.visible = false
+		if(Actionable):
+			$"Highlight-offcursor".visible = true
+			$"Highlight-offcursor".get_surface_override_material(0).set_shader_parameter("Text", summonTile)
+		
+		if(curpos[0] == BPos[0] and curpos[1]== BPos[1]):
+			$Highight.visible = true
+			
+		return
+
+		
 	$Highight.visible = false
 	$"Highlight-offcursor".visible = false
 	if(curpos[0] == BPos[0] or curpos[1]== BPos[1]):
 		$"Highlight-offcursor".visible = true
+		$"Highlight-offcursor".get_surface_override_material(0).set_shader_parameter("Text", highlightTile)
 		#WORKS!!!
 		#$"Highlight-offcursor".get_surface_override_material(0).set_shader_parameter("Text", summonTile)
 	if(curpos[0] == BPos[0] and curpos[1]== BPos[1]):

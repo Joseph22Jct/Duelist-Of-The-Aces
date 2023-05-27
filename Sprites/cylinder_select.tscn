@@ -1,0 +1,19 @@
+[gd_scene load_steps=6 format=3 uid="uid://cc6bkd3wlseff"]
+
+[ext_resource type="PackedScene" uid="uid://dqoelsutjhje8" path="res://cylinderSelect.glb" id="1_oo8vh"]
+[ext_resource type="Script" path="res://Scripts/cylinder_select.gd" id="2_tck5q"]
+[ext_resource type="Shader" uid="uid://cwga6pctd18f1" path="res://Sprites/TransparentShader.tres" id="2_yvvmm"]
+[ext_resource type="Texture2D" uid="uid://te03nrars4pf" path="res://Sprites/SelectCylinder.png" id="3_2gpru"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_h2edo"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("2_yvvmm")
+shader_parameter/Texture = ExtResource("3_2gpru")
+
+[node name="cylinderSelect" instance=ExtResource("1_oo8vh")]
+script = ExtResource("2_tck5q")
+
+[node name="Cylinder" parent="." index="0"]
+transform = Transform3D(0.6, 0, 0, 0, 1, 0, 0, 0, 0.6, 0, -0.24, 0)
+surface_material_override/0 = SubResource("ShaderMaterial_h2edo")

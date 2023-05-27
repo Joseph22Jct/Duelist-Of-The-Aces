@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://mexu4h118gdr"]
+
+[ext_resource type="Texture2D" uid="uid://c622hhhwhnal2" path="res://Sprites/fusionFlags.png" id="1_dfpeh"]
+[ext_resource type="FontFile" uid="uid://cxsqcm26sdou4" path="res://Sprites/JosFont.ttf" id="2_sity0"]
+
+[node name="TextureRect" type="TextureRect"]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("1_dfpeh")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_top = 3.0
+offset_right = 63.0
+offset_bottom = 39.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("2_sity0")
+theme_override_font_sizes/font_size = 32
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1

@@ -1,0 +1,163 @@
+[gd_scene load_steps=8 format=3 uid="uid://cdbjt1ss1obq2"]
+
+[ext_resource type="Script" path="res://Scripts/UIManager.gd" id="1_1gmat"]
+[ext_resource type="Texture2D" uid="uid://b7yaht6kautop" path="res://Sprites/UI/Scores3.png" id="2_3514e"]
+[ext_resource type="Texture2D" uid="uid://crqxrhmlt8njh" path="res://Sprites/UI/Scores1.png" id="3_7mja8"]
+[ext_resource type="FontFile" uid="uid://cxsqcm26sdou4" path="res://Sprites/JosFont.ttf" id="4_1tqer"]
+[ext_resource type="Texture2D" uid="uid://bqvda6jucyo0u" path="res://Sprites/UI/Scores2.png" id="5_xsgcj"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4p8jf"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sk5kr"]
+
+[node name="UIManager" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1280.0
+offset_bottom = 720.0
+script = ExtResource("1_1gmat")
+
+[node name="Scores" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 1280.0
+offset_bottom = 720.0
+
+[node name="ScoreP1" type="Control" parent="Scores"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Sprite2D" type="Sprite2D" parent="Scores/ScoreP1"]
+modulate = Color(1, 0.882353, 0.831373, 1)
+material = SubResource("ShaderMaterial_4p8jf")
+position = Vector2(125, 80)
+scale = Vector2(2, 2)
+texture = ExtResource("2_3514e")
+
+[node name="Border" type="TextureRect" parent="Scores/ScoreP1"]
+material = SubResource("ShaderMaterial_sk5kr")
+layout_mode = 0
+offset_right = 125.0
+offset_bottom = 80.0
+scale = Vector2(2, 2)
+texture = ExtResource("3_7mja8")
+
+[node name="Scores" type="Control" parent="Scores/ScoreP1"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Cards" type="Label" parent="Scores/ScoreP1/Scores"]
+layout_mode = 0
+offset_left = 189.0
+offset_top = 88.0
+offset_right = 229.0
+offset_bottom = 111.0
+scale = Vector2(2, 2)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("4_1tqer")
+text = "40"
+
+[node name="AP" type="Label" parent="Scores/ScoreP1/Scores"]
+layout_mode = 0
+offset_left = 189.0
+offset_top = 53.0
+offset_right = 229.0
+offset_bottom = 76.0
+scale = Vector2(2, 2)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("4_1tqer")
+text = "12
+"
+
+[node name="Health" type="Label" parent="Scores/ScoreP1/Scores"]
+layout_mode = 0
+offset_left = 189.0
+offset_top = 20.0
+offset_right = 229.0
+offset_bottom = 43.0
+scale = Vector2(2, 2)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("4_1tqer")
+text = "20"
+
+[node name="ScoreP2" type="Control" parent="Scores"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Sprite2D" type="Sprite2D" parent="Scores/ScoreP2"]
+modulate = Color(0.831373, 0.870588, 1, 1)
+material = SubResource("ShaderMaterial_4p8jf")
+position = Vector2(1155, 80)
+scale = Vector2(2, 2)
+texture = ExtResource("2_3514e")
+
+[node name="Border" type="TextureRect" parent="Scores/ScoreP2"]
+material = SubResource("ShaderMaterial_sk5kr")
+layout_mode = 0
+offset_left = 1030.0
+offset_right = 1155.0
+offset_bottom = 80.0
+scale = Vector2(2, 2)
+texture = ExtResource("5_xsgcj")
+
+[node name="Scores" type="Control" parent="Scores/ScoreP2"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 1030.0
+offset_right = 1070.0
+offset_bottom = 40.0
+
+[node name="Cards" type="Label" parent="Scores/ScoreP2/Scores"]
+layout_mode = 0
+offset_left = 189.0
+offset_top = 88.0
+offset_right = 229.0
+offset_bottom = 111.0
+scale = Vector2(2, 2)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("4_1tqer")
+text = "40"
+
+[node name="AP" type="Label" parent="Scores/ScoreP2/Scores"]
+layout_mode = 0
+offset_left = 189.0
+offset_top = 53.0
+offset_right = 229.0
+offset_bottom = 76.0
+scale = Vector2(2, 2)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("4_1tqer")
+text = "12
+"
+
+[node name="Health" type="Label" parent="Scores/ScoreP2/Scores"]
+layout_mode = 0
+offset_left = 189.0
+offset_top = 20.0
+offset_right = 229.0
+offset_bottom = 43.0
+scale = Vector2(2, 2)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("4_1tqer")
+text = "20"
+
+[node name="FusionFlags" type="Control" parent="."]
+anchors_preset = 0
+offset_left = 270.0
+offset_top = 140.0
+offset_right = 270.0
+offset_bottom = 140.0

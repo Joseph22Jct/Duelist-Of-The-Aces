@@ -21,4 +21,4 @@ func _process(delta):
 	pass
 	
 func OnCallback():
-	print("Followed Cursor!")
+	print("Followed Cursor! To: "+ str(Globals.Cursor.curPos))
