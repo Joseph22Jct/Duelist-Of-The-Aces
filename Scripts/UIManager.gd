@@ -61,12 +61,16 @@ func ToggleFusionFlag(cur):
 	
 	
 	if (cur in FusionQueue):
-		$FusionFlags.get_child(FusionQueue.find(cur)).queue_free()
-		FusionQueue.erase(cur)
-		var curint = 1
 		for x in $FusionFlags.get_children():
-			x.get_child(0).text = str(curint)
-			curint+=1
+			x.queue_free()
+		FusionQueue.erase(cur)
+		print(FusionQueue)
+		
+		for x in range(len(FusionQueue)):
+			var FF = FusionFlagobj.instantiate()
+			$FusionFlags.add_child(FF)
+			FF.get_child(0).text = str(x+1)
+			FF.position = Vector2(165*FusionQueue[x],0)
 	else:
 		FusionQueue.append(cur)
 		var FF = FusionFlagobj.instantiate()
