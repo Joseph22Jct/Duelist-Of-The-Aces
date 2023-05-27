@@ -31,6 +31,9 @@ func _process(delta):
 	if(Input.is_action_just_pressed("Right")):
 		if(curPos[0]<6):
 			MoveCursor([curPos[0]+1, curPos[1]])
+	
+	if(Input.is_action_just_pressed("SummonFlip")):
+		pass
 			
 #	if(Input.is_action_just_released("Test")):
 #		print(Globals.Pathfinder.Pathfind(curPos.duplicate(), [3,3]))

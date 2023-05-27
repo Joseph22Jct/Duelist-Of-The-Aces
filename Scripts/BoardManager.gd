@@ -2,6 +2,7 @@ extends Node3D
 
 var Map = []
 var BoardTiles = preload("res://Objects/board_tile.tscn")
+var CardP= preload("res://Objects/card_Piece.tscn")
 
 
 # Called when the node enters the scene tree for the first time.
@@ -16,8 +17,12 @@ func _ready():
 			Map[y-1].append(BT)
 			BT.BPos = [x,y]
 			BT.SetType(x)
-			
-			
+	var P1LeaderPiece = CardP.instantiate()
+	P1LeaderPiece.SetUp(0,0,1,[3,6])
+	var P2LeaderPiece = CardP.instantiate()
+	P2LeaderPiece.SetUp(0,0,2,[3,0])
+	$CardPieces.add_child(P1LeaderPiece)
+	$CardPieces.add_child(P2LeaderPiece)
 	pass # Replace with function body.
 
 
