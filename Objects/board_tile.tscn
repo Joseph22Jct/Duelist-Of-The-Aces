@@ -1,48 +1,48 @@
-[gd_scene load_steps=17 format=3 uid="uid://d1g45ixtt03wc"]
+[gd_scene load_steps=24 format=3 uid="uid://d1g45ixtt03wc"]
 
-[ext_resource type="Texture2D" uid="uid://vwgifl2kk2b3" path="res://Sprites/Tiles/Boards10.png" id="1_4c61i"]
-[ext_resource type="Texture2D" uid="uid://bv20rxpidwbtl" path="res://Sprites/Tiles/Boards7.png" id="2_m40ch"]
+[ext_resource type="PackedScene" uid="uid://7jtuy4lr5xl2" path="res://Sprites/highlight.tscn" id="2_1wt0w"]
+[ext_resource type="Texture2D" uid="uid://dgr6vd5mkfewu" path="res://Sprites/highlight cursor.png" id="3_mw1lf"]
 [ext_resource type="Script" path="res://Scripts/BoardTile.gd" id="3_sdljq"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_ptum4"]
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_5ituw"]
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_gjf3h"]
 load_path = "res://.godot/imported/Boards1.png-0d908caa2a3cf13720d5d0b92f6c49a8.ctex"
 
-[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_wcy8x"]
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_wecoj"]
 output_port_for_preview = 0
 expanded_output_ports = [0]
 source = 5
-texture = SubResource("CompressedTexture2D_5ituw")
+texture = SubResource("CompressedTexture2D_gjf3h")
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_6owim"]
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_d0s5a"]
 load_path = "res://.godot/imported/Boards8.png-674dc600c7f3f36e560f6945bdfa1126.ctex"
 
-[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_pyy06"]
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_kedaw"]
 source = 5
-texture = SubResource("CompressedTexture2D_6owim")
+texture = SubResource("CompressedTexture2D_d0s5a")
 
-[sub_resource type="VisualShaderNodeIf" id="VisualShaderNodeIf_my2kt"]
+[sub_resource type="VisualShaderNodeIf" id="VisualShaderNodeIf_e7j8j"]
 
-[sub_resource type="VisualShaderNodeMultiplyAdd" id="VisualShaderNodeMultiplyAdd_7oujk"]
+[sub_resource type="VisualShaderNodeMultiplyAdd" id="VisualShaderNodeMultiplyAdd_vdg74"]
 output_port_for_preview = 0
 default_input_values = [0, Vector3(0, 0, 0), 1, Vector3(1, 1, 1), 2, Vector3(0, 0, 0)]
 op_type = 2
 
-[sub_resource type="VisualShaderNodeUVFunc" id="VisualShaderNodeUVFunc_wax1b"]
+[sub_resource type="VisualShaderNodeUVFunc" id="VisualShaderNodeUVFunc_swoh8"]
 default_input_values = [1, Vector2(-0.2, -0.2), 2, Vector2(0, 0)]
 
-[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_ix6cv"]
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_n5ng5"]
 input_name = "time"
 
-[sub_resource type="VisualShaderNodeTexture2DParameter" id="VisualShaderNodeTexture2DParameter_i3fkj"]
+[sub_resource type="VisualShaderNodeTexture2DParameter" id="VisualShaderNodeTexture2DParameter_01xl5"]
 parameter_name = "BGText"
 
-[sub_resource type="VisualShaderNodeTexture2DParameter" id="VisualShaderNodeTexture2DParameter_uegai"]
+[sub_resource type="VisualShaderNodeTexture2DParameter" id="VisualShaderNodeTexture2DParameter_7diyk"]
 parameter_name = "MainText"
 texture_filter = 1
 
-[sub_resource type="VisualShader" id="VisualShader_rkxed"]
+[sub_resource type="VisualShader" id="VisualShader_c1bcp"]
 code = "shader_type spatial;
 uniform sampler2D MainText : filter_nearest;
 uniform sampler2D BGText;
@@ -101,35 +101,95 @@ void fragment() {
 
 }
 "
-graph_offset = Vector2(-494.886, 40.7197)
+graph_offset = Vector2(-614.745, 183.63)
 nodes/fragment/0/position = Vector2(1060, 40)
-nodes/fragment/2/node = SubResource("VisualShaderNodeTexture_wcy8x")
+nodes/fragment/2/node = SubResource("VisualShaderNodeTexture_wecoj")
 nodes/fragment/2/position = Vector2(-80, 40)
-nodes/fragment/3/node = SubResource("VisualShaderNodeTexture_pyy06")
+nodes/fragment/3/node = SubResource("VisualShaderNodeTexture_kedaw")
 nodes/fragment/3/position = Vector2(280, 460)
-nodes/fragment/4/node = SubResource("VisualShaderNodeIf_my2kt")
+nodes/fragment/4/node = SubResource("VisualShaderNodeIf_e7j8j")
 nodes/fragment/4/position = Vector2(580, 360)
-nodes/fragment/5/node = SubResource("VisualShaderNodeMultiplyAdd_7oujk")
+nodes/fragment/5/node = SubResource("VisualShaderNodeMultiplyAdd_vdg74")
 nodes/fragment/5/position = Vector2(800, 200)
-nodes/fragment/6/node = SubResource("VisualShaderNodeUVFunc_wax1b")
+nodes/fragment/6/node = SubResource("VisualShaderNodeUVFunc_swoh8")
 nodes/fragment/6/position = Vector2(0, 560)
-nodes/fragment/7/node = SubResource("VisualShaderNodeInput_ix6cv")
+nodes/fragment/7/node = SubResource("VisualShaderNodeInput_n5ng5")
 nodes/fragment/7/position = Vector2(-280, 580)
-nodes/fragment/8/node = SubResource("VisualShaderNodeTexture2DParameter_i3fkj")
+nodes/fragment/8/node = SubResource("VisualShaderNodeTexture2DParameter_01xl5")
 nodes/fragment/8/position = Vector2(-320, 660)
-nodes/fragment/9/node = SubResource("VisualShaderNodeTexture2DParameter_uegai")
+nodes/fragment/9/node = SubResource("VisualShaderNodeTexture2DParameter_7diyk")
 nodes/fragment/9/position = Vector2(-480, 180)
 nodes/fragment/connections = PackedInt32Array(2, 4, 4, 0, 3, 0, 4, 3, 2, 0, 5, 0, 4, 0, 5, 2, 5, 0, 0, 0, 6, 0, 3, 0, 7, 0, 6, 2, 8, 0, 3, 2, 9, 0, 2, 2)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_tckhw"]
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_tcg2w"]
+load_path = "res://.godot/imported/Boards8.png-674dc600c7f3f36e560f6945bdfa1126.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_4r8og"]
+load_path = "res://.godot/imported/Boards7.png-d9a7238fcd616e5f717b28c19e445627.ctex"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_f6tpc"]
+resource_local_to_scene = true
 render_priority = 0
-shader = SubResource("VisualShader_rkxed")
-shader_parameter/MainText = ExtResource("2_m40ch")
-shader_parameter/BGText = ExtResource("1_4c61i")
+shader = SubResource("VisualShader_c1bcp")
+shader_parameter/MainText = SubResource("CompressedTexture2D_4r8og")
+shader_parameter/BGText = SubResource("CompressedTexture2D_tcg2w")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_f4jcb"]
+
+[sub_resource type="VisualShaderNodeTexture2DParameter" id="VisualShaderNodeTexture2DParameter_bllo1"]
+parameter_name = "Text"
+texture_filter = 1
+
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_euq3a"]
+expanded_output_ports = [0]
+source = 5
+
+[sub_resource type="VisualShader" id="VisualShader_0u3hd"]
+code = "shader_type spatial;
+uniform sampler2D Text : filter_nearest;
+
+
+
+void fragment() {
+	vec4 n_out3p0;
+// Texture2D:3
+	n_out3p0 = texture(Text, UV);
+	float n_out3p4 = n_out3p0.a;
+
+
+// Output:0
+	ALBEDO = vec3(n_out3p0.xyz);
+	ALPHA = n_out3p4;
+
+
+}
+"
+graph_offset = Vector2(-390.768, 1.82394)
+nodes/fragment/2/node = SubResource("VisualShaderNodeTexture2DParameter_bllo1")
+nodes/fragment/2/position = Vector2(-440, 240)
+nodes/fragment/3/node = SubResource("VisualShaderNodeTexture_euq3a")
+nodes/fragment/3/position = Vector2(0, 220)
+nodes/fragment/connections = PackedInt32Array(2, 0, 3, 2, 3, 0, 0, 0, 3, 4, 0, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yxyao"]
+resource_local_to_scene = true
+render_priority = 0
+shader = SubResource("VisualShader_0u3hd")
+shader_parameter/Text = ExtResource("3_mw1lf")
 
 [node name="BoardTile" type="MeshInstance3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
 mesh = SubResource("PlaneMesh_ptum4")
 skeleton = NodePath("../..")
-surface_material_override/0 = SubResource("ShaderMaterial_tckhw")
+surface_material_override/0 = SubResource("ShaderMaterial_f6tpc")
 script = ExtResource("3_sdljq")
+
+[node name="Highight" parent="." instance=ExtResource("2_1wt0w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.05269, 0)
+visible = false
+
+[node name="Highlight-offcursor" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
+visible = false
+mesh = SubResource("PlaneMesh_f4jcb")
+surface_material_override/0 = SubResource("ShaderMaterial_yxyao")

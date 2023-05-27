@@ -12,10 +12,11 @@ func _ready():
 		for x in range(7):
 			var BT= BoardTiles.instantiate()
 			$Tiles.add_child(BT)
-			BT.position = Vector3((y-3)*2,0.6,(x-3)*2)
+			BT.position = Vector3((x-3)*2,0.6,(y-3)*2)
 			Map[y-1].append(BT)
 			BT.BPos = [x,y]
 			BT.SetType(x)
+			
 			
 	pass # Replace with function body.
 

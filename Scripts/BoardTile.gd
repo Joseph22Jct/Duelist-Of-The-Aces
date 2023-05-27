@@ -4,8 +4,11 @@ class_name BoardTile
 
 var TerrainType = 0
 var BPos = []
+var Actionable = false ##Can move or summon
 
-
+var highlightTile = preload("res://Sprites/highlight cursor.png")
+var summonTile = preload("res://Sprites/summonTile.png")
+var movTile = preload("res://Sprites/movementTile.png")
 
 var NormalTerrain = preload("res://Sprites/Tiles/Boards7.png")
 var OddTerrain = preload("res://Sprites/Tiles/Boards1.png")
@@ -22,36 +25,42 @@ var CBG = preload("res://Sprites/Tiles/Boards12.png")
 var SBG = preload("res://Sprites/Tiles/Boards13.png")
 
 func SetType(Type):
+	Globals.Cursor.connect("CursorMoved", Callable(self, "CheckHighlight"))
 	match Type:
 		0:
-			set_instance_shader_parameter("MainText", NormalTerrain)
+			get_surface_override_material(0).set_shader_parameter("MainText", NormalTerrain)
 		1:
-			set_instance_shader_parameter("MainText", OddTerrain)
-			set_instance_shader_parameter("BGText", OBG)
+			get_surface_override_material(0).set_shader_parameter("MainText", OddTerrain)
+			get_surface_override_material(0).set_shader_parameter("BGText", OBG)
+			
 		2:
-			set_instance_shader_parameter("MainText", EvenTerrain)
-			set_instance_shader_parameter("BGText", EBG)
+			get_surface_override_material(0).set_shader_parameter("MainText", EvenTerrain)
+			get_surface_override_material(0).set_shader_parameter("BGText", EBG)
 		3:
-			set_instance_shader_parameter("MainText", DiamondTerrain)
-			set_instance_shader_parameter("BGText", DBG)
+			get_surface_override_material(0).set_shader_parameter("MainText", DiamondTerrain)
+			get_surface_override_material(0).set_shader_parameter("BGText", DBG)
 		4:
-			set_instance_shader_parameter("MainText", HeartTerrain)
-			set_instance_shader_parameter("BGText", HBG)
+			get_surface_override_material(0).set_shader_parameter("MainText", HeartTerrain)
+			get_surface_override_material(0).set_shader_parameter("BGText", HBG)
 		5:
-			set_instance_shader_parameter("MainText", ClubTerrain)
-			set_instance_shader_parameter("BGText", CBG)
+			get_surface_override_material(0).set_shader_parameter("MainText", ClubTerrain)
+			get_surface_override_material(0).set_shader_parameter("BGText", CBG)
 		6:
-			set_instance_shader_parameter("MainText", SpadeTerrain)
-			set_instance_shader_parameter("BGText", SBG)
+			get_surface_override_material(0).set_shader_parameter("MainText", SpadeTerrain)
+			get_surface_override_material(0).set_shader_parameter("BGText", SBG)
 			pass
 	TerrainType = Type
 	print("Type Set to: " + str(Type)+ " at tile: "+ str(BPos))
 			
 # Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func CheckHighlight(oldpos, curpos):
+	$Highight.visible = false
+	$"Highlight-offcursor".visible = false
+	if(curpos[0] == BPos[0] or curpos[1]== BPos[1]):
+		$"Highlight-offcursor".visible = true
+		#WORKS!!!
+		#$"Highlight-offcursor".get_surface_override_material(0).set_shader_parameter("Text", summonTile)
+	if(curpos[0] == BPos[0] and curpos[1]== BPos[1]):
+		$Highight.visible = true
+		$"Highlight-offcursor".visible = false
 	pass

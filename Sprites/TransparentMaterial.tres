@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://djb0lnlv6vm06" path="res://CursorTexture.png" id="2_x7rgk"]
 
 [resource]
+resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("1_jnyqv")
 shader_parameter/Texture = ExtResource("2_x7rgk")

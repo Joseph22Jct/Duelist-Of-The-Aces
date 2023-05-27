@@ -1,0 +1,15 @@
+[gd_scene load_steps=5 format=3 uid="uid://7jtuy4lr5xl2"]
+
+[ext_resource type="PackedScene" uid="uid://ctsju77el4py5" path="res://Sprites/Highight.glb" id="1_tu1vj"]
+[ext_resource type="Shader" uid="uid://cwnoht5u4d8qa" path="res://Sprites/highlight.tres" id="2_cck20"]
+[ext_resource type="Texture2D" uid="uid://c45glkyr1ru3r" path="res://Sprites/cursorhighlighttexture.png" id="3_v70fi"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6b40s"]
+render_priority = -1
+shader = ExtResource("2_cck20")
+shader_parameter/Text = ExtResource("3_v70fi")
+
+[node name="Highight" instance=ExtResource("1_tu1vj")]
+
+[node name="Cube" parent="." index="0"]
+surface_material_override/0 = SubResource("ShaderMaterial_6b40s")

@@ -1,9 +1,12 @@
 extends Node3D
 
 var cState = "Main"
+var Player1Score = [20,4,40]
+var Player2Score = [20,4,40]
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	
 	pass # Replace with function body.
 
 

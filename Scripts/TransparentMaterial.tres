@@ -1,9 +1,10 @@
 [gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://c6sdk13jxrhjv"]
 
 [ext_resource type="Shader" uid="uid://cwga6pctd18f1" path="res://Sprites/TransparentShader.tres" id="1_pcht1"]
-[ext_resource type="Texture2D" uid="uid://b4cjymflynd47" path="res://Sprites/Cards/Borders1.png" id="2_wegwq"]
+[ext_resource type="Texture2D" uid="uid://cfbauo6cep76g" path="res://Sprites/Cards/Cards.png" id="2_3m06f"]
 
 [resource]
+resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("1_pcht1")
-shader_parameter/Texture = ExtResource("2_wegwq")
+shader_parameter/Texture = ExtResource("2_3m06f")

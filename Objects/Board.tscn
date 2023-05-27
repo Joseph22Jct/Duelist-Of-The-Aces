@@ -1,17 +1,40 @@
-[gd_scene load_steps=2 format=3 uid="uid://cgw47buhjmb5u"]
+[gd_scene load_steps=8 format=3 uid="uid://cgw47buhjmb5u"]
 
 [ext_resource type="PackedScene" uid="uid://ceb2o8aywdsjm" path="res://Boardblend.glb" id="1_50lfb"]
+[ext_resource type="Texture2D" uid="uid://v1b8pon5jsji" path="res://Sprites/Wood texture.png" id="2_gamu6"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x2ohh"]
+albedo_texture = ExtResource("2_gamu6")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kuq28"]
+albedo_color = Color(0.145098, 0.596078, 0.901961, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dxqxg"]
+albedo_color = Color(0.85098, 0.196078, 0.227451, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_n18ma"]
+albedo_color = Color(0.176471, 0.65098, 0.14902, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8dwot"]
+albedo_color = Color(0.858824, 0.654902, 0.207843, 1)
 
 [node name="Boardblend" instance=ExtResource("1_50lfb")]
 
+[node name="Table" parent="." index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_x2ohh")
+
 [node name="Diamond" parent="." index="1"]
 transform = Transform3D(1.543, 1.543, -0.707107, -2.18213, 2.18213, 0, 1.543, 1.543, 0.707107, 9.94881, 2.94345, -9.66976)
+surface_material_override/0 = SubResource("StandardMaterial3D_kuq28")
 
 [node name="Spade" parent="." index="2"]
 transform = Transform3D(1.58463, 0, 0.707107, 0, 2.221, 0, -1.58463, 0, 0.707107, -10.0637, 1.75998, -10)
+surface_material_override/0 = SubResource("StandardMaterial3D_dxqxg")
 
 [node name="Club" parent="." index="3"]
 transform = Transform3D(1.41421, 0, 1.41421, 0, 2, 0, -1.41421, 0, 1.41421, 10.1123, 2.23904, 10)
+surface_material_override/0 = SubResource("StandardMaterial3D_n18ma")
 
 [node name="Sphere" parent="." index="4"]
 transform = Transform3D(2.12132, 0, -2.12132, 0, 3, 0, 2.12132, 0, 2.12132, -9.8137, 4.44744, 10)
+surface_material_override/0 = SubResource("StandardMaterial3D_8dwot")

@@ -1,11 +1,25 @@
-[gd_scene load_steps=5 format=3 uid="uid://b4l6ddyxnnf7u"]
+[gd_scene load_steps=8 format=3 uid="uid://bgqjom8dl6ui"]
 
 [ext_resource type="Shader" uid="uid://cwga6pctd18f1" path="res://Sprites/TransparentShader.tres" id="1_4dc1p"]
 [ext_resource type="Texture2D" uid="uid://cfbauo6cep76g" path="res://Sprites/Cards/Cards.png" id="2_7fjpb"]
+[ext_resource type="Script" path="res://Scripts/Card.gd" id="2_xwfau"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_4id68"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_21gtw"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mw3ee"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("1_4dc1p")
+shader_parameter/Texture = ExtResource("2_7fjpb")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5wd1u"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("1_4dc1p")
+shader_parameter/Texture = ExtResource("2_7fjpb")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_geqtb"]
+resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("1_4dc1p")
 shader_parameter/Texture = ExtResource("2_7fjpb")
@@ -13,10 +27,17 @@ shader_parameter/Texture = ExtResource("2_7fjpb")
 [node name="Card" type="MeshInstance3D"]
 mesh = SubResource("PlaneMesh_4id68")
 skeleton = NodePath("../../Boardblend")
-surface_material_override/0 = SubResource("ShaderMaterial_21gtw")
+surface_material_override/0 = SubResource("ShaderMaterial_mw3ee")
+script = ExtResource("2_xwfau")
 
 [node name="CardFaceUp" type="MeshInstance3D" parent="."]
 transform = Transform3D(-1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 0, 0, 0)
 mesh = SubResource("PlaneMesh_4id68")
 skeleton = NodePath("../../Boardblend")
-surface_material_override/0 = SubResource("ShaderMaterial_21gtw")
+surface_material_override/0 = SubResource("ShaderMaterial_5wd1u")
+
+[node name="CardFaceUpNumber" type="MeshInstance3D" parent="CardFaceUp"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.50205e-10, 0.00972521, 0)
+mesh = SubResource("PlaneMesh_4id68")
+skeleton = NodePath("../../Boardblend")
+surface_material_override/0 = SubResource("ShaderMaterial_geqtb")

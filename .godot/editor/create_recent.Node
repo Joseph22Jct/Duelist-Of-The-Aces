@@ -1,5 +1,9 @@
-MeshInstance3D
 Node3D
+MeshInstance3D
+Label
+Control
+Sprite2D
+TextureRect
 WorldEnvironment
 OmniLight3D
 Camera3D
