@@ -29,6 +29,7 @@ func UpdateScore(which, Health = null, AP = null, Deck = null):
 	Globals.UIManager.SetScore(1, Player1Score)
 	Globals.UIManager.SetScore(2, Player2Score)
 
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	Globals.GameManager = self
@@ -41,6 +42,9 @@ func _process(delta):
 	pass
 
 func Main():
+	if(Input.is_action_just_pressed("Start")):
+		ChangeState("EndTurn")
+	pass
 #	if(Input.is_action_just_pressed("SummonFlip")):
 #		ChangeState("Summon")
 	#print("OK!")
@@ -50,7 +54,7 @@ func Summon():
 	if(Input.is_action_just_pressed("Cancel")):
 		ChangeState("Main")
 	
-	pass
+	
 
 func ShowCards():
 	if(Input.is_action_just_pressed("Cancel")):
@@ -75,6 +79,9 @@ func PieceMovement():
 	pass
 	
 func Combat():
+	pass
+
+func EndTurn():
 	pass
 	
 func ChangeState(state):
@@ -109,4 +116,18 @@ func ChangeState(state):
 			cState = "Combat"
 			Globals.Cursor.ToggleCursor(false)
 			Globals.BoardManager.CancelTiles()
+		"EndTurn":
+			cState= "EndTurn"
+			Globals.SoundManager.PlaySoundEffect("TurnOver")
+			Globals.Cursor.ToggleCursor(false)
+			Globals.UIManager.ToggleSummon(false)
+			UpdateScore(curPhase,0,4,0)
+			Globals.BoardManager.RefreshCards()
+			if curPhase ==1:
+				curPhase = 2
+			else:
+				curPhase = 1
+				turnCount+=1
+				Globals.UIManager.UpdateTurn(turnCount)
+			Globals.Camera.CameraShift(curPhase)
 			

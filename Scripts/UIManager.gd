@@ -17,10 +17,29 @@ func _ready():
 	Cards = Node3D.new()
 	ComM = Globals.CombatManager
 	pass
+var NotSummonUsed = preload("res://Sprites/SummonIcon1.png")
+var SummonUsed = preload("res://Sprites/SummonIcon2.png")
+
+func UpdateTurn(turn):
+	$TurnCount/Turn.text = str(turn)
+
+func ToggleSummon(boolean):
+	hasSummoned = boolean
+	if(boolean):
+		if(GameManager.curPhase==1):
+			$Scores/ScoreP1/Scores/Summoned.texture = SummonUsed
+		else:	
+			$Scores/ScoreP2/Scores/Summoned.texture = SummonUsed
+	else:
+		if(GameManager.curPhase==1):
+			$Scores/ScoreP1/Scores/Summoned.texture = NotSummonUsed
+		else:	
+			$Scores/ScoreP2/Scores/Summoned.texture = NotSummonUsed
+	pass
 	
 func StartFight(init:CardBase, foe:CardBase):
 	Globals.SoundManager.PlaySoundEffect("CombatStart")
-	Globals.Camera.add_child(Cards)
+	Globals.Camera.get_node("Camera").add_child(Cards)
 	Cards.position = CamOffset + Vector3(3,0,0)
 	var card = Globals.CardManager.SpawnCard(init)
 	var foeCard =  Globals.CardManager.SpawnCard(foe)
@@ -146,7 +165,7 @@ func StartFight(init:CardBase, foe:CardBase):
 
 func ShowCards():
 	
-	Globals.Camera.add_child(Cards)
+	Globals.Camera.get_node("Camera").add_child(Cards)
 	Cards.position = CamOffset
 	for x in range(len(Globals.CardManager.Hand1)):
 		var card = Globals.CardManager.SpawnCard(Globals.CardManager.Hand1[x])
@@ -169,6 +188,11 @@ func HideCards():
 
 var justPressed = false
 func _process(delta):
+	
+	if(GameManager.curPhase != 1):
+		##AIMovements
+		
+		return
 	
 	
 	if(Globals.GameManager.cState == "ShowCards"):
@@ -313,7 +337,7 @@ func FuseCards():
 		Globals.CardManager.SummonCard(Globals.Cursor.curPos, CardsCh[FusionQueue[0]].GetCard())
 	GameManager.ChangeState("Main")
 	HideCards()
-	hasSummoned = true
+	ToggleSummon(true)
 	
 	
 func SpawnFusedCard():

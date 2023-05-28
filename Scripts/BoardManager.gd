@@ -32,6 +32,12 @@ func _ready():
 	Globals.CardManager.SummonCard([3,3],Card1, 2)
 	pass # Replace with function body.
 
+func RefreshCards():
+	var pieces = $CardPieces.get_children()
+	for x in pieces:
+		x.ToggleWait(false)
+	pass
+
 func MovePiece(PieceTile, newPos):
 	Globals.SoundManager.PlaySoundEffect("PlaceCard")
 	#CheckForCombats

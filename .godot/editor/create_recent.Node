@@ -1,11 +1,11 @@
-Label
-Control
-TextureRect
+Camera3D
 Node3D
+Label
+TextureRect
+Control
 MeshInstance3D
 AudioStreamPlayer
 AudioStreamPlayer3D
 Sprite2D
 WorldEnvironment
 OmniLight3D
-Camera3D

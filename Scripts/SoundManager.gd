@@ -14,6 +14,7 @@ var SoundEffects = {
 	"SummonCard" : preload("res://Sounds/Sound Effects/SummonCard.wav"),
 	"FuseSelect" : preload("res://Sounds/Sound Effects/FuseSelect.wav"),
 	"Cannot": preload("res://Sounds/Sound Effects/Cannot.wav"),
+	"TurnOver": preload("res://Sounds/Sound Effects/TurnOver.wav"),
 }
 
 var SoundEffectsVol = {
@@ -28,6 +29,7 @@ var SoundEffectsVol = {
 	"SummonCard" : 50,
 	"FuseSelect": 30,
 	"Cannot": 50,
+	"TurnOver": 30,
 	
 }
 # Called when the node enters the scene tree for the first time.
