@@ -33,7 +33,7 @@ func _ready():
 	pass # Replace with function body.
 
 func MovePiece(PieceTile, newPos):
-	
+	Globals.SoundManager.PlaySoundEffect("PlaceCard")
 	#CheckForCombats
 	var piece = PieceTile.Piece
 	piece.BPos = newPos
@@ -45,6 +45,29 @@ func MovePiece(PieceTile, newPos):
 	print("Code reached")
 	piece.ToggleWait(true)
 	
+	pass
+	
+func FightAftermath(result):
+	print("Fight Done!")
+	var initTile:BoardTile = Globals.CombatManager.InitiatingTile
+	var foeTile:BoardTile = Globals.CombatManager.currentCombatTile
+	if result==1: ##Init won
+		foeTile.Piece.queue_free()
+		foeTile.Piece = null
+		MovePiece(initTile,foeTile.BPos)
+		pass
+	elif result == -1: ##foe won
+		initTile.Piece.queue_free()
+		initTile.Piece = null
+		
+		pass
+	else: ##Neither did
+		initTile.Piece.queue_free()
+		initTile.Piece = null
+		foeTile.Piece.queue_free()
+		foeTile.Piece = null
+		pass
+	GameManager.ChangeState("Main")
 	pass
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

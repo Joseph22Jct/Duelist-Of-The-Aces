@@ -6,6 +6,8 @@ var UIM: UIManager
 var curTypeAdvantage = 0
 var curTerrainAdvantage = 0 
 var currentCombatTile = null
+var InitiatingTile = null
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

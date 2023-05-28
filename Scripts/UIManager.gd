@@ -18,7 +18,8 @@ func _ready():
 	ComM = Globals.CombatManager
 	pass
 	
-func StartFight(init, foe):
+func StartFight(init:CardBase, foe:CardBase):
+	Globals.SoundManager.PlaySoundEffect("CombatStart")
 	Globals.Camera.add_child(Cards)
 	Cards.position = CamOffset + Vector3(3,0,0)
 	var card = Globals.CardManager.SpawnCard(init)
@@ -30,7 +31,116 @@ func StartFight(init, foe):
 	foeCard.rotation_degrees = Vector3(90,-180,0)
 	foeCard.position = Vector3(1.5,0,0)
 	print(str(ComM.curTerrainAdvantage) + " and type: " + str(ComM.curTypeAdvantage))
-	TODO;
+	
+	var tween = get_tree().create_tween()
+	var tween2 = get_tree().create_tween()
+	Globals.SoundManager.PlaySoundEffect("CombatDone")
+	if(ComM.curTerrainAdvantage!=0 or ComM.curTypeAdvantage!=0):
+		if(ComM.curTerrainAdvantage==1):
+			tween.tween_property($Bonuses/P1/Terrain, "position", Vector2(300,0),0.5)
+		elif(ComM.curTerrainAdvantage==-1):
+			tween.tween_property($Bonuses/P2/Terrain, "position", Vector2(-300,0),0.5)
+		else:
+			tween.tween_property($Bonuses/P1/Terrain, "position", Vector2(0,0),0.5)
+		if(ComM.curTypeAdvantage == 1):
+			tween2.tween_property($Bonuses/P1/Type, "position", Vector2(300,200),0.5)
+		elif(ComM.curTypeAdvantage == -1):
+			tween2.tween_property($Bonuses/P2/Type, "position", Vector2(-300,200),0.5)
+		else:
+			tween2.tween_property($Bonuses/P1/Type, "position", Vector2(0,0),0.5)
+		await tween.finished
+		print("Pt1 Done")
+	tween = get_tree().create_tween()
+	tween.tween_property($Bonuses/P1/Terrain, "scale", Vector2(1,1),0.5)
+	await tween.finished
+	print("Pt2 Done")
+	if(ComM.curTerrainAdvantage!=0 or ComM.curTypeAdvantage!=0):
+		tween = get_tree().create_tween()
+		tween2 = get_tree().create_tween()
+		if(ComM.curTerrainAdvantage==1):
+			tween.tween_property($Bonuses/P1/Terrain, "position", Vector2(0,0),0.5)
+		elif(ComM.curTerrainAdvantage==-1):
+			tween.tween_property($Bonuses/P2/Terrain, "position", Vector2(0,0),0.5)
+		else:
+			tween.tween_property($Bonuses/P1/Terrain, "position", Vector2(0,0),0.5)
+		if(ComM.curTypeAdvantage == 1):
+			tween2.tween_property($Bonuses/P1/Type, "position", Vector2(0,200),0.5)
+		elif(ComM.curTypeAdvantage == -1):
+			tween2.tween_property($Bonuses/P2/Type, "position", Vector2(0,200),0.5)
+		else:
+			tween2.tween_property($Bonuses/P1/Type, "position", Vector2(0,0),0.5)
+		await tween.finished
+	var result
+	var DamageDealt = 0
+	if(init.number+ ComM.curTerrainAdvantage + ComM.curTypeAdvantage > foe.number or init.number == 1):
+		if(init.number == 1):
+			DamageDealt = 0
+		else:
+			DamageDealt = init.number+ ComM.curTerrainAdvantage + ComM.curTypeAdvantage - foe.number
+		$DamageDealt.visible = true
+		$DamageDealt.text = "Dealt "+ str(DamageDealt)+ " damage to foe!"
+		result = 1
+		tween = get_tree().create_tween()
+		tween.tween_property(card, "position", foeCard.position,0.3).set_trans(Tween.TRANS_SINE)
+		
+		await tween.finished
+		Globals.SoundManager.PlaySoundEffect("Confirm")
+		tween = get_tree().create_tween()
+		tween.tween_property(foeCard, "position", Vector3(15,0,0),0.2).set_trans(Tween.TRANS_LINEAR)
+		await tween.finished
+		pass
+	elif(init.number+ ComM.curTerrainAdvantage + ComM.curTypeAdvantage < foe.number):
+		DamageDealt = init.number+ ComM.curTerrainAdvantage + ComM.curTypeAdvantage - foe.number
+		$DamageDealt.visible = true
+		$DamageDealt.text = "Received "+ str(DamageDealt)+ " damage..."
+		result = -1
+		tween = get_tree().create_tween()
+		tween.tween_property(foeCard, "position", card.position,0.3).set_trans(Tween.TRANS_SINE)
+		await tween.finished
+		Globals.SoundManager.PlaySoundEffect("Confirm")
+		tween = get_tree().create_tween()
+		tween.tween_property(card, "position", Vector3(-15,0,0),0.2).set_trans(Tween.TRANS_LINEAR)
+		await tween.finished
+		pass
+	else:
+		result = 0
+		$DamageDealt.visible = true
+		$DamageDealt.text = "Both cards eliminated. No Damage."
+		tween = get_tree().create_tween()
+		tween.tween_property(foeCard, "position", Vector3.ZERO,0.3).set_trans(Tween.TRANS_SINE)
+		tween2 = get_tree().create_tween()
+		tween2.tween_property(card, "position", Vector3.ZERO,0.3).set_trans(Tween.TRANS_SINE)
+		await tween.finished
+		Globals.SoundManager.PlaySoundEffect("Confirm")
+		tween = get_tree().create_tween()
+		tween.tween_property(card, "position", Vector3(-10,0,0),0.3).set_trans(Tween.TRANS_LINEAR)
+		tween2 = get_tree().create_tween()
+		tween2.tween_property(foeCard, "position", Vector3(10,0,0),0.3).set_trans(Tween.TRANS_LINEAR)
+		
+		await tween.finished
+	tween = get_tree().create_tween()
+	tween.tween_property($Bonuses/P1/Terrain, "scale", Vector2(1,1),0.5)
+	await tween.finished
+	tween = get_tree().create_tween()
+	if(result == -1):
+		tween.tween_property(foeCard, "position", Vector3(0,10,0),0.3).set_trans(Tween.TRANS_LINEAR)
+		await tween.finished
+	elif(result == 1):
+		tween.tween_property(card, "position", Vector3(0,10,0),0.3).set_trans(Tween.TRANS_LINEAR)
+		await tween.finished
+	$DamageDealt.visible = false
+	
+	if(DamageDealt>0 and GameManager.curPhase == 1):
+		GameManager.UpdateScore(2, -DamageDealt,0,0)
+	elif(DamageDealt>0 and GameManager.curPhase == 2):
+		GameManager.UpdateScore(1, -DamageDealt,0,0)
+	if(DamageDealt<0 and GameManager.curPhase == 1):
+		GameManager.UpdateScore(1, -DamageDealt,0,0)
+	elif(DamageDealt<0 and GameManager.curPhase == 2):
+		GameManager.UpdateScore(2, -DamageDealt,0,0)
+	Globals.SoundManager.PlaySoundEffect("Confirm")
+	Globals.BoardManager.FightAftermath(result)
+	#TODO;
 	pass
 		
 
@@ -87,6 +197,15 @@ func _process(delta):
 		
 		if(Input.is_action_just_pressed("Confirm") and not justPressed):
 			if(not hasSummoned):
+				if(FusionQueue!=[]):
+					if(GameManager.GetCurPhaseAP()<Globals.CardManager.GetCurrentHand()[FusionQueue[0]].number):
+						Globals.SoundManager.PlaySoundEffect("Cannot")
+						return
+					pass
+				else:
+					if(GameManager.GetCurPhaseAP()<Globals.CardManager.GetCurrentHand()[CurCardSelect].number):
+						Globals.SoundManager.PlaySoundEffect("Cannot")
+						return
 				justPressed = true
 				Globals.GameManager.ChangeState("ConfirmCards")
 				Globals.SoundManager.PlaySoundEffect("Confirm")

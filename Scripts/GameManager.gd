@@ -6,6 +6,11 @@ var Player2Score = [20,8,0]
 var turnCount = 1
 var curPhase = 1
 
+func GetCurPhaseAP():
+	if(curPhase == 1):
+		return Player1Score[1]
+	else:
+		return Player2Score[1] 
 func UpdateScore(which, Health = null, AP = null, Deck = null):
 	if which ==1:
 		if(Health!=null):

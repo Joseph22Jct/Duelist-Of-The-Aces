@@ -19,6 +19,12 @@ func _ready():
 	PieceHolder = get_parent().get_node("CardPieces")
 	BM = Globals.BoardManager
 	
+func GetCurrentHand():
+	if(GameManager.curPhase==1):
+		return Hand1
+	else:
+		return Hand2
+	
 func CreateDecks():
 	
 	for type in range(5):

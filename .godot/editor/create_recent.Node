@@ -1,8 +1,8 @@
+Label
+Control
+TextureRect
 Node3D
 MeshInstance3D
-Label
-TextureRect
-Control
 AudioStreamPlayer
 AudioStreamPlayer3D
 Sprite2D

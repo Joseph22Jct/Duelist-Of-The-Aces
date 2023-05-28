@@ -19,8 +19,8 @@ var SoundEffects = {
 var SoundEffectsVol = {
 	"BattleOver": 50,
 	"Cancel" : 50,
-	"CombatDone":50,
-	"CombatStart" :50,
+	"CombatDone":20,
+	"CombatStart" :20,
 	"Confirm" : 50,
 	"CursorMove" : 30,
 	"Fusion" :20,

@@ -99,7 +99,9 @@ func _process(delta):
 						var enemyTile: BoardTile = GetCurBoardTile()
 						if(enemyTile.Piece.POwner != GameManager.curPhase):
 							Globals.GameManager.ChangeState("Combat")
-							Globals.CombatManager.StartCombat(curTileSelectedMov.Piece,enemyTile.Piece, enemyTile)
+							Globals.BoardManager.MovePiece(curTileSelectedMov, oldPos)
+							Globals.CombatManager.InitiatingTile = Globals.BoardManager.Map[oldPos[0]][oldPos[1]]
+							Globals.CombatManager.StartCombat(Globals.CombatManager.InitiatingTile.Piece,enemyTile.Piece, enemyTile)
 							pass
 						return
 						
