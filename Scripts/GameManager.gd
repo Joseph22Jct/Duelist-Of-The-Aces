@@ -52,7 +52,17 @@ func ShowCards():
 		ChangeState("Summon")
 	pass
 	
+func ConfirmCards():
+	
+	pass
+	
+func Fuse():
+	
+	pass
+	
+	
 func ChangeState(state):
+	
 	match state:
 		"Main":
 			cState = "Main"
@@ -64,8 +74,15 @@ func ChangeState(state):
 			Globals.Cursor.ToggleCursor(true)
 			Globals.UIManager.HideCards()
 		"ShowCards":
+			if(cState == "ConfirmCards"):
+				cState = "ShowCards"
+				return
 			cState = "ShowCards"
 			Globals.UIManager.ShowCards()
 			Globals.Cursor.ToggleCursor(false)
+		"ConfirmCards":
+			cState = "ConfirmCards"
+		"Fuse":
+			cState = "Fuse"
 			
 	

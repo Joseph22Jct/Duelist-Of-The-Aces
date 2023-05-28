@@ -15,3 +15,8 @@ res://Sprites/cylinder_select.tscn
 res://Scripts/cylinder_select.gd
 res://Scripts/CursorManager.gd
 res://Sprites/FusionFlags.tscn
+res://Scripts/Card.gd
+res://Scripts/BoardTile.gd
+res://Scripts/SoundManager.gd
+res://Scripts/BoardManager.gd
+res://Scripts/CardPiece.gd

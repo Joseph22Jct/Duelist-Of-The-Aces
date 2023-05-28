@@ -7,6 +7,7 @@ var BPos = []
 var Actionable = false
 var Summon = false ##Can move or summon
 var Movement = false
+var Piece = null
 
 var highlightTile = preload("res://Sprites/highlight cursor.png")
 var summonTile = preload("res://Sprites/summonTile.png")

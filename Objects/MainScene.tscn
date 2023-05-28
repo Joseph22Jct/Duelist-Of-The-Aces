@@ -1,6 +1,5 @@
-[gd_scene load_steps=14 format=3 uid="uid://6srte17tc7yn"]
+[gd_scene load_steps=13 format=3 uid="uid://6srte17tc7yn"]
 
-[ext_resource type="Script" path="res://Scripts/GameManager.gd" id="1_3px8p"]
 [ext_resource type="PackedScene" uid="uid://cgw47buhjmb5u" path="res://Objects/Board.tscn" id="1_6ql8c"]
 [ext_resource type="Script" path="res://Scripts/BoardManager.gd" id="2_admdy"]
 [ext_resource type="Script" path="res://Scripts/Camera.gd" id="6_lhvja"]
@@ -24,7 +23,6 @@ ambient_light_source = 2
 ambient_light_color = Color(1, 1, 1, 1)
 
 [node name="GameManager" type="Node3D"]
-script = ExtResource("1_3px8p")
 
 [node name="BoardManager" type="Node3D" parent="."]
 script = ExtResource("2_admdy")

@@ -10,10 +10,14 @@ var Deck2 = []
 var Hand1 = []
 var Hand2 = []
 
+var PieceHolder : Node3D
+var BM : BoardManager
 func _ready():
 	Globals.CardManager = self
 	await get_tree().process_frame
 	CreateDecks()
+	PieceHolder = get_parent().get_node("CardPieces")
+	BM = Globals.BoardManager
 	
 func CreateDecks():
 	
@@ -56,6 +60,15 @@ func DrawCard(which):
 	else:
 		Globals.GameManager.UpdateScore(2,null,null, -1)
 		return Deck2.pop_at(randi()%Deck2.size())
+	pass
+
+func Fuse(base, other):
+	var FusedCard:CardBase = CardBase.new()
+	
+	FusedCard.type = base.type
+	FusedCard.number = int(((base.number + other.number) /2)+0.6)
+		
+	return FusedCard
 	pass
 
 # Called when the node enters the scene tree for the first time.
@@ -122,10 +135,38 @@ func SpawnCard(C:CardBase = null, type = null, number = null): ##Type 0 makes Bl
 	curCard.SetCard(typetexture, numTexture)
 	return curCard
 
+func UseCards(FusionQueue):
+	print(FusionQueue)
+	var loop = 0
+	for x in FusionQueue:
+		if GameManager.curPhase == 1:
+			Hand1.pop_at(x+loop)
+			loop-=1
+			
+		else:
+			Hand2.pop_at(x+loop)
+			loop-=1
+			
+	print("Hands updated")
 	
-	
-func SpawnPiece(C:CardBase = null, type = null, number = null): ##Type 0 make leader. 
+func SummonCard(pos, C:CardBase = null, type = null, number = null): ##Type 0 make leader. 
 	var curPiece = CardPiece.instantiate()
+	var curCard = SpawnCard(C)
+	curPiece.SetUp(C.type, C.number, GameManager.curPhase,pos )
+	curPiece.add_child(curCard)
+	
+	PieceHolder.add_child(curPiece)
+	curPiece.position = BM.Map[pos[0]][pos[1]].position
+	curCard.position =Vector3(0,10,0)
+	BM.Map[pos[0]][pos[1]].Piece = curPiece 
+	var tween = create_tween()
+	tween.tween_property(curPiece, "position", Vector3(curPiece.position.x, 1.058, curPiece.position.z), 0.6)
+	var tween2 = create_tween()
+	tween2.tween_property(curCard, "position", Vector3.ZERO, 0.6)
+	await tween.finished
+	
+	
+	
 	##TODO Set up the curCard Textures
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

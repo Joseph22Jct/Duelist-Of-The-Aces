@@ -39,15 +39,17 @@ func _process(delta):
 		if(Globals.GameManager.cState == "Main" and Globals.BoardManager.P1LeaderPiece.BPos == curPos):
 			if(len(Globals.CardManager.Hand1) >0):
 				Globals.GameManager.ChangeState("Summon")
+				Globals.SoundManager.PlaySoundEffect("Confirm")
 		pass
 	
-	if(Input.is_action_just_pressed("Confirm")):
+	if(Input.is_action_just_released("Confirm")):
 		if(Globals.GameManager.cState == "Summon" ):
 			print(curPos)
 			print(Globals.BoardManager.Map[curPos[0]][curPos[1]].Actionable)
 			if(Globals.BoardManager.Map[curPos[0]][curPos[1]].Actionable == true):
 				print("Workds")
 				Globals.GameManager.ChangeState("ShowCards")
+				Globals.SoundManager.PlaySoundEffect("Confirm")
 		pass
 			
 #	if(Input.is_action_just_released("Test")):

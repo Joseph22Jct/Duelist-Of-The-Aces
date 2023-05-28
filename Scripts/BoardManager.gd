@@ -1,5 +1,5 @@
 extends Node3D
-
+class_name BoardManager
 var Map = []
 var BoardTiles = preload("res://Objects/board_tile.tscn")
 var CardP= preload("res://Objects/card_Piece.tscn")

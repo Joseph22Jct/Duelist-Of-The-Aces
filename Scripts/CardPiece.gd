@@ -28,9 +28,7 @@ func SetUp(typ, val, own, pos):
 		$Border.get_surface_override_material(0).set_shader_parameter("Texture", P2Border)
 	if type == 0:
 		get_node("Leader").visible = true
-	else:
-		CardObj = Globals.CardManager.SpawnCard(null, type, number)
-		add_child(CardObj)
+	
 	PlacePiece(BPos)
 
 func PlacePiece(curPos): ##Maybe on placing first time the card falls from the sky?
