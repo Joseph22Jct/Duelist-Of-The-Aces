@@ -60,6 +60,17 @@ func Fuse():
 	
 	pass
 	
+func MovePiece():
+	if(Input.is_action_just_pressed("Cancel")):
+		Globals.Cursor.CancelMov()
+		ChangeState("Main")
+	pass
+
+func PieceMovement():
+	pass
+	
+func Combat():
+	pass
 	
 func ChangeState(state):
 	
@@ -84,5 +95,13 @@ func ChangeState(state):
 			cState = "ConfirmCards"
 		"Fuse":
 			cState = "Fuse"
+		"MovePiece":
+			cState = "MovePiece"
+			Globals.BoardManager.ShowTraversibleTiles()
+		"PieceMovement":
+			cState = "PieceMovement"
+		"Combat":
+			cState = "Combat"
+			Globals.Cursor.ToggleCursor(false)
+			Globals.BoardManager.CancelTiles()
 			
-	

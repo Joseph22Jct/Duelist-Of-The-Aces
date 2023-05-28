@@ -1,7 +1,8 @@
-[gd_scene load_steps=13 format=3 uid="uid://6srte17tc7yn"]
+[gd_scene load_steps=14 format=3 uid="uid://6srte17tc7yn"]
 
 [ext_resource type="PackedScene" uid="uid://cgw47buhjmb5u" path="res://Objects/Board.tscn" id="1_6ql8c"]
 [ext_resource type="Script" path="res://Scripts/BoardManager.gd" id="2_admdy"]
+[ext_resource type="Script" path="res://Scripts/CombatManager.gd" id="2_y631b"]
 [ext_resource type="Script" path="res://Scripts/Camera.gd" id="6_lhvja"]
 [ext_resource type="PackedScene" uid="uid://cdbjt1ss1obq2" path="res://Objects/ui_manager.tscn" id="8_njx32"]
 [ext_resource type="PackedScene" uid="uid://rtnssltdn6yx" path="res://Objects/sound_manager.tscn" id="14_dqm0h"]
@@ -26,6 +27,9 @@ ambient_light_color = Color(1, 1, 1, 1)
 
 [node name="BoardManager" type="Node3D" parent="."]
 script = ExtResource("2_admdy")
+
+[node name="CombatManager" type="Node3D" parent="BoardManager"]
+script = ExtResource("2_y631b")
 
 [node name="Boardblend" parent="BoardManager" instance=ExtResource("1_6ql8c")]
 

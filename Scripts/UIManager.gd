@@ -1,5 +1,6 @@
 extends Control
 
+class_name UIManager
 var CardObj = preload("res://Objects/card.tscn")
 var cylinderSelect = preload("res://Sprites/cylinder_select.tscn")
 var FusionFlagobj = preload("res://Sprites/FusionFlags.tscn")
@@ -8,12 +9,31 @@ var FusionQueue = []
 var Cards 
 var CurCardSelect = 0
 var cS
+var hasSummoned = false
+var ComM : CombatManager
 
 func _ready():
 	Globals.UIManager = self
 	Cards = Node3D.new()
+	ComM = Globals.CombatManager
 	pass
 	
+func StartFight(init, foe):
+	Globals.Camera.add_child(Cards)
+	Cards.position = CamOffset + Vector3(3,0,0)
+	var card = Globals.CardManager.SpawnCard(init)
+	var foeCard =  Globals.CardManager.SpawnCard(foe)
+	Cards.add_child(card)
+	card.rotation_degrees = Vector3(90,-180,0)
+	card.position = Vector3(-1.5,0,0)
+	Cards.add_child(foeCard)
+	foeCard.rotation_degrees = Vector3(90,-180,0)
+	foeCard.position = Vector3(1.5,0,0)
+	print(str(ComM.curTerrainAdvantage) + " and type: " + str(ComM.curTypeAdvantage))
+	TODO;
+	pass
+		
+
 func ShowCards():
 	
 	Globals.Camera.add_child(Cards)
@@ -66,10 +86,13 @@ func _process(delta):
 			pass
 		
 		if(Input.is_action_just_pressed("Confirm") and not justPressed):
-			justPressed = true
-			Globals.GameManager.ChangeState("ConfirmCards")
-			Globals.SoundManager.PlaySoundEffect("Confirm")
-			ConfirmCards(CurCardSelect)
+			if(not hasSummoned):
+				justPressed = true
+				Globals.GameManager.ChangeState("ConfirmCards")
+				Globals.SoundManager.PlaySoundEffect("Confirm")
+				ConfirmCards(CurCardSelect)
+			else:
+				Globals.SoundManager.PlaySoundEffect("Cannot")
 			return
 			
 			
@@ -94,6 +117,7 @@ func _process(delta):
 	
 var FusedCard
 func FuseCards():
+	
 	cS.visible = false
 	for x in $FusionFlags.get_children():
 		x.queue_free()
@@ -170,6 +194,7 @@ func FuseCards():
 		Globals.CardManager.SummonCard(Globals.Cursor.curPos, CardsCh[FusionQueue[0]].GetCard())
 	GameManager.ChangeState("Main")
 	HideCards()
+	hasSummoned = true
 	
 	
 func SpawnFusedCard():
@@ -249,7 +274,7 @@ func SetScore(Player, values):
 	
 		$Scores/ScoreP1/Scores/Cards.text = str(values[2])
 			
-	if Player == 1:
+	if Player != 1:
 		
 		$Scores/ScoreP2/Scores/Health.text = str(values[0])
 	

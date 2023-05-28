@@ -149,11 +149,12 @@ func UseCards(FusionQueue):
 			
 	print("Hands updated")
 	
-func SummonCard(pos, C:CardBase = null, type = null, number = null): ##Type 0 make leader. 
+func SummonCard(pos, C:CardBase = null, which = GameManager.curPhase): ##Type 0 make leader. 
 	var curPiece = CardPiece.instantiate()
 	var curCard = SpawnCard(C)
-	curPiece.SetUp(C.type, C.number, GameManager.curPhase,pos )
+	curPiece.SetUp(C.type, C.number, which,pos )
 	curPiece.add_child(curCard)
+	curPiece.CardObj = curCard
 	
 	PieceHolder.add_child(curPiece)
 	curPiece.position = BM.Map[pos[0]][pos[1]].position

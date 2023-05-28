@@ -8,3 +8,4 @@ var CardManager
 var SoundManager
 var GameManager
 var UIManager
+var CombatManager

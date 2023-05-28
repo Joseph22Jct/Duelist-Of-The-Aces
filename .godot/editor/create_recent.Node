@@ -1,10 +1,10 @@
+Node3D
+MeshInstance3D
 Label
 TextureRect
 Control
-Node3D
 AudioStreamPlayer
 AudioStreamPlayer3D
-MeshInstance3D
 Sprite2D
 WorldEnvironment
 OmniLight3D

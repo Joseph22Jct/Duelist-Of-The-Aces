@@ -20,3 +20,7 @@ res://Scripts/BoardTile.gd
 res://Scripts/SoundManager.gd
 res://Scripts/BoardManager.gd
 res://Scripts/CardPiece.gd
+res://Sprites/cursor_blend.tscn
+res://Objects/Board.tscn
+res://Scripts/CombatManager.gd
+res://Scripts/Globals.gd

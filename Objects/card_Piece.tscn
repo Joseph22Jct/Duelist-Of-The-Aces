@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://doowr667gqcfl"]
+[gd_scene load_steps=10 format=3 uid="uid://doowr667gqcfl"]
 
 [ext_resource type="Script" path="res://Scripts/CardPiece.gd" id="1_lbiud"]
 [ext_resource type="Shader" uid="uid://cwga6pctd18f1" path="res://Sprites/TransparentShader.tres" id="2_tawla"]
 [ext_resource type="Texture2D" uid="uid://b4cjymflynd47" path="res://Sprites/Cards/Borders1.png" id="3_35nvr"]
+[ext_resource type="Texture2D" uid="uid://s1fikklrb0tc" path="res://Sprites/Cards/WaitTexture.png" id="4_oj60j"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_4id68"]
 
@@ -15,9 +16,16 @@ shader_parameter/Texture = ExtResource("3_35nvr")
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_0eor4"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fye3h"]
+render_priority = 2
 albedo_color = Color(0.94902, 0.843137, 0.454902, 1)
 
-[node name="CardPiece (Add Card in code)" type="Node3D"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mcqn8"]
+resource_local_to_scene = true
+render_priority = 2
+shader = ExtResource("2_tawla")
+shader_parameter/Texture = ExtResource("4_oj60j")
+
+[node name="CardPiece" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0581, 0)
 script = ExtResource("1_lbiud")
 
@@ -31,3 +39,10 @@ transform = Transform3D(1, 0, 0, 0, 0.644167, 0, 0, 0, 1, 0, 0.589629, 0)
 visible = false
 mesh = SubResource("CapsuleMesh_0eor4")
 surface_material_override/0 = SubResource("StandardMaterial3D_fye3h")
+
+[node name="Wait" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0304893, 0)
+visible = false
+mesh = SubResource("PlaneMesh_4id68")
+skeleton = NodePath("../../Boardblend")
+surface_material_override/0 = SubResource("ShaderMaterial_mcqn8")

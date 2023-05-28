@@ -76,6 +76,18 @@ func CheckHighlight(oldpos = null, curpos= null):
 			$Highight.visible = true
 			
 		return
+		
+	if(Movement):
+		$"Highlight-offcursor".visible = false
+		$Highight.visible = false
+		if(Actionable):
+			$"Highlight-offcursor".visible = true
+			$"Highlight-offcursor".get_surface_override_material(0).set_shader_parameter("Text",movTile)
+		
+		if(curpos[0] == BPos[0] and curpos[1]== BPos[1]):
+			$Highight.visible = true
+			
+		return
 
 		
 	$Highight.visible = false

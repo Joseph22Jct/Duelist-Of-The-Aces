@@ -9,19 +9,19 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_mw3ee"]
 resource_local_to_scene = true
-render_priority = 0
+render_priority = 2
 shader = ExtResource("1_4dc1p")
 shader_parameter/Texture = ExtResource("2_7fjpb")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5wd1u"]
 resource_local_to_scene = true
-render_priority = 0
+render_priority = 2
 shader = ExtResource("1_4dc1p")
 shader_parameter/Texture = ExtResource("2_7fjpb")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_geqtb"]
 resource_local_to_scene = true
-render_priority = 0
+render_priority = 2
 shader = ExtResource("1_4dc1p")
 shader_parameter/Texture = ExtResource("4_irbnc")
 
