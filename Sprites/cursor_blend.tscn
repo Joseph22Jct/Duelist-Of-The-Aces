@@ -1,9 +1,16 @@
-[gd_scene load_steps=3 format=3 uid="uid://dv8cnt50u64if"]
+[gd_scene load_steps=5 format=3 uid="uid://dv8cnt50u64if"]
 
 [ext_resource type="PackedScene" uid="uid://c121h3muei5xc" path="res://CursorBlend.glb" id="1_pyg4k"]
-[ext_resource type="Material" uid="uid://c6sdk13jxrhjv" path="res://Sprites/TransparentMaterial.tres" id="2_bkebp"]
+[ext_resource type="Shader" uid="uid://cwga6pctd18f1" path="res://Sprites/TransparentShader.tres" id="2_o6h41"]
+[ext_resource type="Texture2D" uid="uid://djb0lnlv6vm06" path="res://CursorTexture.png" id="3_fbsdh"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3j11w"]
+resource_local_to_scene = true
+render_priority = 2
+shader = ExtResource("2_o6h41")
+shader_parameter/Texture = ExtResource("3_fbsdh")
 
 [node name="CursorBlend" instance=ExtResource("1_pyg4k")]
 
 [node name="Cone" parent="." index="0"]
-surface_material_override/0 = ExtResource("2_bkebp")
+surface_material_override/0 = SubResource("ShaderMaterial_3j11w")

@@ -1,11 +1,52 @@
 extends Node3D
 class_name BoardManager
 var Map = []
+var BoardType = 0
 var BoardTiles = preload("res://Objects/board_tile.tscn")
 var CardP= preload("res://Objects/card_Piece.tscn")
 var P1LeaderPiece
 var P2LeaderPiece
 # Called when the node enters the scene tree for the first time.
+
+func GetPiecesWithinSpaces(pos, amount):
+	var Pieces = []
+	for x in range(len(Map)):
+		for y in range(len(Map[0])):
+			if DistanceAway(pos, [x,y])<=amount:
+				if(Map[x][y].Piece!=null):
+					Pieces.append(Map[x][y])
+	return Pieces
+			
+			
+func SetBoard():
+	match GameManager.SelectedBoard:
+		#Map[3][3].SetType(0)
+		0:
+			
+			for x in range(7):
+				Map[x][4].SetType(5)
+				Map[x][5].SetType(6)
+				Map[x][1].SetType(3)
+				Map[x][2].SetType(4)
+				
+			for x in range(7):
+				
+				Map[2][x].SetType(1)
+				Map[4][x].SetType(2)
+				
+			for x in range(7):
+				Map[3][x].SetType(0)
+		1:
+			Map[3][3].SetType(2)
+		2:
+			Map[3][3].SetType(1)
+		3:
+			Map[3][3].SetType(2)
+		4:
+			Map[3][3].SetType(1)
+		5:
+			Map[3][3].SetType(2)
+
 func _ready():
 	Globals.BoardManager = self
 	for x in range(7):
@@ -16,7 +57,8 @@ func _ready():
 			BT.position = Vector3((x-3)*2,0.6,(y-3)*2)
 			Map[x].append(BT)
 			BT.BPos = [x,y]
-			BT.SetType(x)
+			
+	SetBoard()
 	P1LeaderPiece = CardP.instantiate()
 	Map[3][6].Piece = P1LeaderPiece
 	P1LeaderPiece.SetUp(0,0,1,[3,6])
@@ -26,12 +68,31 @@ func _ready():
 	$CardPieces.add_child(P1LeaderPiece)
 	$CardPieces.add_child(P2LeaderPiece)
 	await get_tree().process_frame
-	var Card1 = CardBase.new()
-	Card1.type = 1
-	Card1.number = 6
-	Globals.CardManager.SummonCard([3,3],Card1, 2)
+	CancelTiles()
+#	var Card1 = CardBase.new()
+#	Card1.type = 1
+#	Card1.number = 6
+#	Globals.CardManager.SummonCard([3,3],Card1, 2)
 	pass # Replace with function body.
 
+func FuseBoardCards(initTile:BoardTile, foeTile:BoardTile): #FuseBoardCards( curTileSelectedMov, GetCurBoardTile())
+	
+	var pos = foeTile.BPos
+	var initC = CardBase.new()
+	initC.type = initTile.Piece.type
+	initC.number = initTile.Piece.number
+	var foeC = CardBase.new()
+	foeC.type = foeTile.Piece.type
+	foeC.number = foeTile.Piece.number
+	var C:CardBase = Globals.CardManager.Fuse(initC, foeC)
+	initTile.Piece.queue_free()
+	initTile.Piece = null
+	foeTile.Piece.queue_free()
+	foeTile.Piece = null
+	Globals.CardManager.SummonCard(pos, C)
+	
+	pass
+	
 func RefreshCards():
 	var pieces = $CardPieces.get_children()
 	for x in pieces:
@@ -57,6 +118,9 @@ func FightAftermath(result):
 	print("Fight Done!")
 	var initTile:BoardTile = Globals.CombatManager.InitiatingTile
 	var foeTile:BoardTile = Globals.CombatManager.currentCombatTile
+	if(foeTile.Piece.type == 0):
+		GameManager.ChangeState("Main")
+		return
 	if result==1: ##Init won
 		foeTile.Piece.queue_free()
 		foeTile.Piece = null
@@ -73,6 +137,7 @@ func FightAftermath(result):
 		foeTile.Piece.queue_free()
 		foeTile.Piece = null
 		pass
+	
 	GameManager.ChangeState("Main")
 	pass
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -123,8 +188,27 @@ func ShowTraversibleTiles(): ##Repeat when flipped and unflipped
 			else:
 				if(DistanceAway(cPos, Map[x][y].BPos)<=1):
 					Map[x][y].Actionable = true
+			
+	for y in range(len(Map)):
+		for x in range(len(Map[0])):
+			if(Map[x][y].Actionable == true and DistanceAway(cPos, [x,y])==2):
+				var xDist = x-cPos[0] 
+				var yDist = y-cPos[1]
+				if(abs(xDist)==2):
+					xDist-= sign(xDist)
+					if(Map[x-xDist][y].Piece != null):
+						Map[x][y].Actionable = false
+					pass
+				elif(abs(yDist)==2):
+					yDist-= sign(yDist)
+					if(Map[x][y-yDist].Piece != null):
+						Map[x][y].Actionable = false
+					pass
+				elif(abs(xDist)==1 and abs(yDist)==1):
+					if(Map[x][y-yDist].Piece != null and Map[x-xDist][y].Piece != null):
+						Map[x][y].Actionable = false
+					pass
 			Map[x][y].CheckHighlight()
-	
 	
 	pass
 	

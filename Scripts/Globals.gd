@@ -9,3 +9,4 @@ var SoundManager
 var GameManager
 var UIManager
 var CombatManager
+var AIManager

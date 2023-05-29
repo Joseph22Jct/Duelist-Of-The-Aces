@@ -37,5 +37,9 @@ func _process(delta):
 	pass
 	
 func OnCallback():
+	Globals.BoardManager.CancelTiles()
 	
+	for x in Globals.BoardManager.Map:
+		for y in x:
+			y.CheckHighlight()
 	GameManager.ChangeState("Main")

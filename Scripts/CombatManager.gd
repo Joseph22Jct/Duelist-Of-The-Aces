@@ -23,9 +23,11 @@ func StartCombat(initPiece:CardPiece,foePiece:CardPiece, combatTile:BoardTile):
 	if(not initPiece.flipped):
 		initPiece.flipped = true
 		initPiece.flipCard()
-	if(not foePiece.flipped):
-		foePiece.flipped = true
-		foePiece.flipCard()
+		
+	if(foePiece.type != 0):
+		if(not foePiece.flipped):
+			foePiece.flipped = true
+			foePiece.flipCard()
 	var Card1 = CardBase.new()
 	var Card2 = CardBase.new()
 	Card1.type = initPiece.type

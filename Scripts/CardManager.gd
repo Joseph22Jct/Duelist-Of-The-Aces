@@ -158,6 +158,7 @@ func UseCards(FusionQueue):
 func SummonCard(pos, C:CardBase = null, which = GameManager.curPhase): ##Type 0 make leader. 
 	var curPiece = CardPiece.instantiate()
 	var curCard = SpawnCard(C)
+	curPiece.ToggleWait(true)
 	curPiece.SetUp(C.type, C.number, which,pos )
 	curPiece.add_child(curCard)
 	curPiece.CardObj = curCard
@@ -171,6 +172,7 @@ func SummonCard(pos, C:CardBase = null, which = GameManager.curPhase): ##Type 0 
 	var tween2 = create_tween()
 	tween2.tween_property(curCard, "position", Vector3.ZERO, 0.6)
 	await tween.finished
+	
 	
 	
 	

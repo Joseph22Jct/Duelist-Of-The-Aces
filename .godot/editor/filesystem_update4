@@ -12,3 +12,16 @@ res://Scripts/UIManager.gd
 res://Scripts/BoardManager.gd
 res://Scripts/Camera.gd
 res://Scripts/SoundManager.gd
+res://Scripts/CursorManager.gd
+res://Scripts/TransparentMaterial.tres
+res://Sprites/cursor_blend.tscn
+res://Scripts/Card.gd
+res://Scripts/CombatManager.gd
+res://Objects/main_menu.tscn
+res://Objects/main_menu.gd
+res://Objects/AIManager.gd
+res://Scripts/AIAction.gd
+res://Scripts/Pathfinder.gd
+res://Objects/board_tile.tscn
+res://Scripts/Globals.gd
+res://Scripts/CardManager.gd

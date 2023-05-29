@@ -42,7 +42,11 @@ func StartFight(init:CardBase, foe:CardBase):
 	Globals.Camera.get_node("Camera").add_child(Cards)
 	Cards.position = CamOffset + Vector3(3,0,0)
 	var card = Globals.CardManager.SpawnCard(init)
-	var foeCard =  Globals.CardManager.SpawnCard(foe)
+	var foeCard
+	if(foe.type!=0):
+		foeCard =  Globals.CardManager.SpawnCard(foe)
+	else:
+		foeCard = Node3D.new()
 	Cards.add_child(card)
 	card.rotation_degrees = Vector3(90,-180,0)
 	card.position = Vector3(-1.5,0,0)
@@ -70,7 +74,7 @@ func StartFight(init:CardBase, foe:CardBase):
 		await tween.finished
 		print("Pt1 Done")
 	tween = get_tree().create_tween()
-	tween.tween_property($Bonuses/P1/Terrain, "scale", Vector2(1,1),0.5)
+	tween.tween_property($Bonuses/P1/Terrain, "scale", Vector2(3,3),0.5)
 	await tween.finished
 	print("Pt2 Done")
 	if(ComM.curTerrainAdvantage!=0 or ComM.curTypeAdvantage!=0):
@@ -138,7 +142,7 @@ func StartFight(init:CardBase, foe:CardBase):
 		
 		await tween.finished
 	tween = get_tree().create_tween()
-	tween.tween_property($Bonuses/P1/Terrain, "scale", Vector2(1,1),0.5)
+	tween.tween_property($Bonuses/P1/Terrain, "scale", Vector2(3,3),0.5)
 	await tween.finished
 	tween = get_tree().create_tween()
 	if(result == -1):
@@ -167,11 +171,19 @@ func ShowCards():
 	
 	Globals.Camera.get_node("Camera").add_child(Cards)
 	Cards.position = CamOffset
-	for x in range(len(Globals.CardManager.Hand1)):
-		var card = Globals.CardManager.SpawnCard(Globals.CardManager.Hand1[x])
-		Cards.add_child(card)
-		card.rotation_degrees = Vector3(90,-180,0)
-		card.position = Vector3(x*1.5,0,0)
+	if(GameManager.curPhase == 1):
+		for x in range(len(Globals.CardManager.Hand1)):
+			var card = Globals.CardManager.SpawnCard(Globals.CardManager.Hand1[x])
+			Cards.add_child(card)
+			card.rotation_degrees = Vector3(90,-180,0)
+			card.position = Vector3(x*1.5,0,0)
+	else:
+		for x in range(len(Globals.CardManager.Hand2)):
+			var card = Globals.CardManager.SpawnCard(Globals.CardManager.Hand2[x])
+			Cards.add_child(card)
+			card.rotation_degrees = Vector3(90,-180,0)
+			card.position = Vector3(x*1.5,0,0)
+			card.hideObj.visible = true
 	cS = cylinderSelect.instantiate()
 	Cards.add_child(cS)
 	cS.position = Cards.get_child(0).position
@@ -187,39 +199,34 @@ func HideCards():
 	justPressed = false
 
 var justPressed = false
-func _process(delta):
-	
-	if(GameManager.curPhase != 1):
-		##AIMovements
-		
-		return
-	
-	
+
+func PressLeft():
 	if(Globals.GameManager.cState == "ShowCards"):
-		if(Input.is_action_just_pressed("Left")):
-			CurCardSelect -=1 
-			if(CurCardSelect == -1):
-				CurCardSelect = 4
-			MoveCursor(CurCardSelect)
-			Globals.SoundManager.PlaySoundEffect("CursorMove")
-			
-		if(Input.is_action_just_pressed("Right")):
-			CurCardSelect +=1 
-			if(CurCardSelect == 5):
-				CurCardSelect = 0
-			MoveCursor(CurCardSelect)
-			Globals.SoundManager.PlaySoundEffect("CursorMove")
+		CurCardSelect -=1 
+		if(CurCardSelect == -1):
+			CurCardSelect = 4
+		MoveCursor(CurCardSelect)
+		Globals.SoundManager.PlaySoundEffect("CursorMove")
+	pass
+	
+func PressRight():
+	if(Globals.GameManager.cState == "ShowCards"):
+		CurCardSelect +=1 
+		if(CurCardSelect == 5):
+			CurCardSelect = 0
+		MoveCursor(CurCardSelect)
+		Globals.SoundManager.PlaySoundEffect("CursorMove")
+	pass
+
+func PressFlip():
+	if(Globals.GameManager.cState == "ShowCards"):
+		ToggleFusionFlag(CurCardSelect)
+		Globals.SoundManager.PlaySoundEffect("FuseSelect")
+		pass
 		
-		if(Input.is_action_just_pressed("Cancel")):
-			Globals.GameManager.ChangeState("Summon")
-			Globals.SoundManager.PlaySoundEffect("Cancel")
-			
-		if(Input.is_action_just_pressed("SummonFlip")):
-			ToggleFusionFlag(CurCardSelect)
-			Globals.SoundManager.PlaySoundEffect("FuseSelect")
-			pass
-		
-		if(Input.is_action_just_pressed("Confirm") and not justPressed):
+func PressConfirm():
+	if(Globals.GameManager.cState == "ShowCards"):
+		if(not justPressed):
 			if(not hasSummoned):
 				if(FusionQueue!=[]):
 					if(GameManager.GetCurPhaseAP()<Globals.CardManager.GetCurrentHand()[FusionQueue[0]].number):
@@ -237,10 +244,46 @@ func _process(delta):
 			else:
 				Globals.SoundManager.PlaySoundEffect("Cannot")
 			return
-			
-			
-		justPressed = false
+				
+			justPressed = false
+	elif(Globals.GameManager.cState == "ConfirmCards"):
 		
+			
+		Globals.GameManager.ChangeState("Fuse")
+		Globals.SoundManager.PlaySoundEffect("Confirm")
+		FuseCards()
+		return
+	pass
+
+func _process(delta):
+	
+	if(GameManager.curPhase != 1):
+		##AIMovements
+		#print("AIMovs")
+		
+		return
+	if(Input.is_action_just_pressed("Left")):
+		PressLeft()
+	
+	if(Input.is_action_just_pressed("Right")):
+		PressRight()
+	
+	if(Input.is_action_just_pressed("SummonFlip")):
+		PressFlip()
+	
+	if(Input.is_action_just_pressed("Confirm")):
+		PressConfirm()
+	
+	if(Globals.GameManager.cState == "ShowCards"):
+		
+		
+		if(Input.is_action_just_pressed("Cancel")):
+			Globals.GameManager.ChangeState("Summon")
+			Globals.SoundManager.PlaySoundEffect("Cancel")
+		
+		
+		
+	
 	elif(Globals.GameManager.cState == "ConfirmCards"):
 		#print("StateChanged!")
 		if(Input.is_action_just_pressed("Cancel")):
@@ -248,12 +291,7 @@ func _process(delta):
 			Globals.SoundManager.PlaySoundEffect("Cancel")
 			CancelCards()
 		pass
-		if(Input.is_action_just_pressed("Confirm")):
-			
-			Globals.GameManager.ChangeState("Fuse")
-			Globals.SoundManager.PlaySoundEffect("Confirm")
-			FuseCards()
-			return
+		
 			
 		
 	pass
@@ -425,3 +463,66 @@ func SetScore(Player, values):
 	
 		$Scores/ScoreP2/Scores/Cards.text = str(values[2])
 # Called when the node enters the scene tree for the first time.
+func UpdateTerrainInfo(pos):
+	var curTile:BoardTile = Globals.BoardManager.Map[pos[0]][pos[1]]
+	var CP :CardPiece = curTile.Piece
+	var Terrain = ""
+	match curTile.TerrainType:
+		0:
+			Terrain = "Normal"
+		1: 
+			Terrain = "Odd"
+		2: 
+			Terrain = "Even"
+		3: 
+			Terrain = "Diamond"
+		4: 
+			Terrain = "Heart"
+		5:
+			Terrain = "Clubs"
+		6:
+			Terrain = "Spade"
+	$BoardInfo/Terrain/Type.text = Terrain
+	
+	if(CP!=null):
+		if(CP.POwner!=1 and (CP.flipped ==false and CP.type!=0)):
+			$BoardInfo/CardInfo/Icon.visible = false
+			$BoardInfo/CardInfo/Number.visible = true
+			$BoardInfo/CardInfo/Number.text = "???"
+		else:
+			$BoardInfo/CardInfo/Icon.visible = true
+			$BoardInfo/CardInfo/Number.visible = true
+			$BoardInfo/CardInfo/Number.text = str(CP.number)
+			if(CP.number == 0):
+				if(GameManager.curPhase==CP.POwner):
+					$BoardInfo/CardInfo/Number.text = "Own"
+				else:
+					$BoardInfo/CardInfo/Number.text = "Foe"
+			if(CP.number == 1):
+				$BoardInfo/CardInfo/Number.text = "A"
+			if(CP.number == 11):
+				$BoardInfo/CardInfo/Number.text = "J"
+			if(CP.number == 12):
+				$BoardInfo/CardInfo/Number.text = "Q"
+			if(CP.number == 13):
+				$BoardInfo/CardInfo/Number.text = "K"
+			
+			var textureSet = null
+			match(CP.type):
+				0:
+					textureSet = preload("res://Sprites/UI/icons5.png")
+				1: 
+					textureSet = preload("res://Sprites/UI/icons1.png")
+				2:
+					textureSet = preload("res://Sprites/UI/icons2.png")
+				3:
+					textureSet = preload("res://Sprites/UI/icons3.png")
+				4:
+					textureSet = preload("res://Sprites/UI/icons4.png")
+				
+			$BoardInfo/CardInfo/Icon.texture = textureSet
+		pass
+	else:
+		$BoardInfo/CardInfo/Icon.visible = false
+		$BoardInfo/CardInfo/Number.visible = false
+	pass

@@ -1,0 +1,286 @@
+[gd_scene load_steps=16 format=3 uid="uid://1gjk4hi8rm1m"]
+
+[ext_resource type="Script" path="res://Objects/main_menu.gd" id="1_nwory"]
+[ext_resource type="Texture2D" uid="uid://baih76ykttac4" path="res://Sprites/Logo.png" id="2_gp6hb"]
+[ext_resource type="FontFile" uid="uid://cxsqcm26sdou4" path="res://Sprites/JosFont.ttf" id="3_uylji"]
+[ext_resource type="Texture2D" uid="uid://8t8v2hrwwtyt" path="res://Sprites/skybox.png" id="4_6hcqx"]
+[ext_resource type="Texture2D" uid="uid://c58v1vm0gu2ne" path="res://Sprites/2DCursor.png" id="5_ddiqv"]
+[ext_resource type="Texture2D" uid="uid://c0wfvcqye60t3" path="res://Sprites/Tiles/Boards1.png" id="6_2t8rf"]
+[ext_resource type="Texture2D" uid="uid://dc0h8qmdu32d7" path="res://Sprites/Tiles/Boards2.png" id="7_t6wqg"]
+[ext_resource type="Texture2D" uid="uid://vp1014wtbpv4" path="res://Sprites/Tiles/Boards3.png" id="8_ltqc2"]
+[ext_resource type="Texture2D" uid="uid://b5ppxrwvfjiea" path="res://Sprites/Tiles/Boards4.png" id="9_g5qnc"]
+[ext_resource type="Texture2D" uid="uid://bhy6gslxgskoh" path="res://Sprites/Tiles/Boards5.png" id="10_u72qc"]
+[ext_resource type="Texture2D" uid="uid://bpvu2dhg6g5bn" path="res://Sprites/Tiles/Boards6.png" id="11_ua7ww"]
+[ext_resource type="Texture2D" uid="uid://b7yaht6kautop" path="res://Sprites/UI/Scores3.png" id="12_uq0fm"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_axcij"]
+panorama = ExtResource("4_6hcqx")
+
+[sub_resource type="Sky" id="Sky_1ruog"]
+sky_material = SubResource("PanoramaSkyMaterial_axcij")
+
+[sub_resource type="Environment" id="Environment_d2kkr"]
+background_mode = 2
+sky = SubResource("Sky_1ruog")
+ambient_light_source = 2
+ambient_light_color = Color(1, 1, 1, 1)
+
+[node name="MainMenu" type="Node3D"]
+script = ExtResource("1_nwory")
+
+[node name="ByYonodusk" type="Label" parent="."]
+offset_left = 3.0
+offset_top = 2.0
+offset_right = 2525.0
+offset_bottom = 1404.0
+scale = Vector2(0.5, 0.5)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = ExtResource("3_uylji")
+theme_override_font_sizes/font_size = 48
+text = "By Yonodusk"
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="Logo" type="TextureRect" parent="."]
+offset_left = 280.0
+offset_top = 30.0
+offset_right = 640.0
+offset_bottom = 220.0
+scale = Vector2(2, 2)
+texture = ExtResource("2_gp6hb")
+
+[node name="PressAnyButtonText" type="Label" parent="."]
+offset_top = 499.0
+offset_right = 1281.0
+offset_bottom = 567.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = ExtResource("3_uylji")
+theme_override_font_sizes/font_size = 48
+text = "-Press any Button-"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_d2kkr")
+
+[node name="Camera" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 6.07098, 6.69037)
+
+[node name="MenuOptions" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_top = 411.0
+offset_right = 1283.0
+offset_bottom = 689.0
+
+[node name="FightCPU" type="Label" parent="MenuOptions"]
+offset_left = 433.0
+offset_top = 50.0
+offset_right = 846.0
+offset_bottom = 118.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = ExtResource("3_uylji")
+theme_override_font_sizes/font_size = 48
+text = "[Fight CPU]"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Tutorial" type="Label" parent="MenuOptions"]
+offset_left = 433.0
+offset_top = 151.0
+offset_right = 847.0
+offset_bottom = 219.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = ExtResource("3_uylji")
+theme_override_font_sizes/font_size = 48
+text = "[Tutorial]
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Selection" type="TextureRect" parent="MenuOptions"]
+layout_mode = 0
+offset_left = 344.0
+offset_top = 52.0
+offset_right = 384.0
+offset_bottom = 92.0
+scale = Vector2(2, 2)
+texture = ExtResource("5_ddiqv")
+
+[node name="FightCPUOptions" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Board1" type="TextureRect" parent="FightCPUOptions"]
+layout_mode = 0
+offset_left = 125.0
+offset_top = 408.0
+offset_right = 189.0
+offset_bottom = 472.0
+scale = Vector2(2, 2)
+texture = ExtResource("6_2t8rf")
+
+[node name="PressAnyButtonText" type="Label" parent="FightCPUOptions/Board1"]
+offset_left = 69.0
+offset_top = 11.0
+offset_right = 143.0
+offset_bottom = 59.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("3_uylji")
+theme_override_font_sizes/font_size = 16
+text = "Board 1
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Board2" type="TextureRect" parent="FightCPUOptions"]
+offset_left = 236.0
+offset_top = 568.0
+offset_right = 300.0
+offset_bottom = 632.0
+scale = Vector2(2, 2)
+texture = ExtResource("7_t6wqg")
+
+[node name="PressAnyButtonText" type="Label" parent="FightCPUOptions/Board2"]
+offset_left = 69.0
+offset_top = 11.0
+offset_right = 143.0
+offset_bottom = 59.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("3_uylji")
+theme_override_font_sizes/font_size = 16
+text = "Board 2"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Board3" type="TextureRect" parent="FightCPUOptions"]
+offset_left = 501.0
+offset_top = 408.0
+offset_right = 565.0
+offset_bottom = 472.0
+scale = Vector2(2, 2)
+texture = ExtResource("8_ltqc2")
+
+[node name="PressAnyButtonText" type="Label" parent="FightCPUOptions/Board3"]
+offset_left = 69.0
+offset_top = 11.0
+offset_right = 143.0
+offset_bottom = 59.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("3_uylji")
+theme_override_font_sizes/font_size = 16
+text = "Board 3"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Board4" type="TextureRect" parent="FightCPUOptions"]
+offset_left = 611.0
+offset_top = 569.0
+offset_right = 675.0
+offset_bottom = 633.0
+scale = Vector2(2, 2)
+texture = ExtResource("9_g5qnc")
+
+[node name="PressAnyButtonText" type="Label" parent="FightCPUOptions/Board4"]
+offset_left = 69.0
+offset_top = 11.0
+offset_right = 143.0
+offset_bottom = 59.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("3_uylji")
+theme_override_font_sizes/font_size = 16
+text = "Board 4
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Board5" type="TextureRect" parent="FightCPUOptions"]
+offset_left = 874.0
+offset_top = 408.0
+offset_right = 938.0
+offset_bottom = 472.0
+scale = Vector2(2, 2)
+texture = ExtResource("10_u72qc")
+
+[node name="PressAnyButtonText" type="Label" parent="FightCPUOptions/Board5"]
+offset_left = 69.0
+offset_top = 11.0
+offset_right = 143.0
+offset_bottom = 59.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("3_uylji")
+theme_override_font_sizes/font_size = 16
+text = "Board 5
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Board6" type="TextureRect" parent="FightCPUOptions"]
+offset_left = 981.0
+offset_top = 570.0
+offset_right = 1045.0
+offset_bottom = 634.0
+scale = Vector2(2, 2)
+texture = ExtResource("11_ua7ww")
+
+[node name="PressAnyButtonText" type="Label" parent="FightCPUOptions/Board6"]
+offset_left = 69.0
+offset_top = 11.0
+offset_right = 143.0
+offset_bottom = 59.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("3_uylji")
+theme_override_font_sizes/font_size = 16
+text = "Board 6"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Selection" type="TextureRect" parent="FightCPUOptions"]
+offset_left = 30.0
+offset_top = 440.0
+offset_right = 70.0
+offset_bottom = 480.0
+scale = Vector2(2, 2)
+texture = ExtResource("5_ddiqv")
+
+[node name="Tutorial" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TextureRect" type="TextureRect" parent="Tutorial"]
+layout_mode = 0
+offset_left = 263.0
+offset_top = 153.0
+offset_right = 388.0
+offset_bottom = 233.0
+scale = Vector2(6, 6)
+texture = ExtResource("12_uq0fm")
+
+[node name="PressAnyButtonText" type="Label" parent="Tutorial/TextureRect"]
+offset_left = 3.0
+offset_top = 2.0
+offset_right = 667.0
+offset_bottom = 423.0
+scale = Vector2(0.18, 0.18)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = ExtResource("3_uylji")
+theme_override_font_sizes/font_size = 16
+text = " How to Play!"

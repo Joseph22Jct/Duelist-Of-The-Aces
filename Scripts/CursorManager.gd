@@ -1,4 +1,5 @@
 extends Node3D
+class_name CursorManager
 
 signal CursorMoved(oldspot, newSpot)
 var curPos = [3,3]
@@ -31,6 +32,15 @@ func CancelMov():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	$CursorBlend.rotate_y(delta)
+	
+	if(Input.is_action_just_pressed("Test")):
+		print(curPos)
+	
+	if(GameManager.curPhase != 1):
+		##AIMovements
+		#print("AIMovs")
+		
+		return
 	if(not enabledCursor):
 		return
 	
@@ -62,13 +72,49 @@ func _process(delta):
 			MoveCursor([curPos[0]+1, curPos[1]])
 	
 	if(Input.is_action_just_pressed("SummonFlip")):
-		if(Globals.GameManager.cState == "Main" and Globals.BoardManager.P1LeaderPiece.BPos == curPos):
+		Flip()
+	
+	if(Input.is_action_just_released("Confirm")):
+		Confirm()
+				
+				
+	
+	
+	
+		
+			
+#	if(Input.is_action_just_released("Test")):
+#		print(Globals.Pathfinder.Pathfind(curPos.duplicate(), [3,3]))
+#		var Card = CM.SpawnCard(null, randi_range(0,4), randi_range(1,13))
+#		add_child(Card)
+#		Card.global_position = Vector3(0,4,0)
+#		Card.rotation_degrees = Vector3(0,0,180)
+			
+	pass
+	
+func Flip():
+	if(Globals.GameManager.cState == "Main" ):
+			
+		if(GameManager.curPhase==1 and Globals.BoardManager.P1LeaderPiece.BPos == curPos):
 			if(len(Globals.CardManager.Hand1) >0):
 				Globals.GameManager.ChangeState("Summon")
 				Globals.SoundManager.PlaySoundEffect("Confirm")
+		elif(GameManager.curPhase!=1 and Globals.BoardManager.P2LeaderPiece.BPos == curPos):
+			if(len(Globals.CardManager.Hand2) >0):
+				Globals.GameManager.ChangeState("Summon")
+				Globals.SoundManager.PlaySoundEffect("Confirm")
+	var tileToCheck = curTileSelectedMov
+	if(Globals.GameManager.cState == "MovePiece" and curPos == tileToCheck.BPos and not curflippedStatus):
+		tileToCheck.Piece.flipped = not tileToCheck.Piece.flipped
+		tileToCheck.Piece.flipCard()
+		Globals.BoardManager.ShowTraversibleTiles()
 		pass
+	pass
+		
+	pass
 	
-	if(Input.is_action_just_released("Confirm")):
+func Confirm():
+	
 		if(Globals.GameManager.cState == "Main"):
 			var Piece = Globals.BoardManager.Map[curPos[0]][curPos[1]].Piece
 			if(Piece!=null and Piece.POwner ==GameManager.curPhase and Piece.waited!=true):
@@ -91,9 +137,17 @@ func _process(delta):
 			
 			
 			if(Globals.BoardManager.Map[curPos[0]][curPos[1]].Actionable == true):
-				if(GetCurBoardTile().Piece !=null):
+				if(GetCurBoardTile().Piece !=null and GetCurBoardTile()!=curTileSelectedMov):
+					if(curTileSelectedMov.Piece.type == 0):
+						Globals.SoundManager.PlaySoundEffect("Cannot")
+						return
 					if(GetCurBoardTile().Piece.type == 0 and GetCurBoardTile().Piece.POwner == GameManager.curPhase):
 						Globals.SoundManager.PlaySoundEffect("Cannot")
+						return
+					elif(GetCurBoardTile().Piece.type != 0 and GetCurBoardTile().Piece.POwner == GameManager.curPhase):
+						Globals.GameManager.ChangeState("Main")
+						Globals.SoundManager.PlaySoundEffect("Fusion")
+						Globals.BoardManager.FuseBoardCards( curTileSelectedMov, GetCurBoardTile())
 						return
 					else:
 						var enemyTile: BoardTile = GetCurBoardTile()
@@ -109,27 +163,7 @@ func _process(delta):
 				Globals.BoardManager.MovePiece(curTileSelectedMov, curPos)
 				Globals.GameManager.ChangeState("Main")
 				Globals.SoundManager.PlaySoundEffect("Confirm")
-				
-				
 	
-	
-	if(Input.is_action_just_released("SummonFlip")):
-		var tileToCheck = curTileSelectedMov
-		if(Globals.GameManager.cState == "MovePiece" and curPos == tileToCheck.BPos and not curflippedStatus):
-			tileToCheck.Piece.flipped = not tileToCheck.Piece.flipped
-			tileToCheck.Piece.flipCard()
-			Globals.BoardManager.ShowTraversibleTiles()
-			pass
-		pass
-			
-#	if(Input.is_action_just_released("Test")):
-#		print(Globals.Pathfinder.Pathfind(curPos.duplicate(), [3,3]))
-#		var Card = CM.SpawnCard(null, randi_range(0,4), randi_range(1,13))
-#		add_child(Card)
-#		Card.global_position = Vector3(0,4,0)
-#		Card.rotation_degrees = Vector3(0,0,180)
-			
-	pass
 	
 func MoveCursor(newPos):
 	Globals.SoundManager.PlaySoundEffect("CursorMove")
@@ -157,6 +191,7 @@ func MoveCursor(newPos):
 			tween.tween_property(piece.CardObj, "global_position", newPos , 0.2).set_trans(Tween.TRANS_LINEAR)
 			
 			pass
+	Globals.UIManager.UpdateTerrainInfo(curPos)
 	
 func ToggleCursor(boolean):
 	enabledCursor = boolean

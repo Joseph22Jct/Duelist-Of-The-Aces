@@ -1,10 +1,14 @@
 extends Node3D
 
-var cState = "Main"
+var cState = "Standby"
 var Player1Score = [20,8,0]
 var Player2Score = [20,8,0]
 var turnCount = 1
 var curPhase = 1
+var MainMenuObject
+var GameplayObject
+var SelectedBoard = 0
+
 
 func GetCurPhaseAP():
 	if(curPhase == 1):
@@ -42,7 +46,7 @@ func _process(delta):
 	pass
 
 func Main():
-	if(Input.is_action_just_pressed("Start")):
+	if(Input.is_action_just_pressed("Start") and curPhase == 1):
 		ChangeState("EndTurn")
 	pass
 #	if(Input.is_action_just_pressed("SummonFlip")):
@@ -83,11 +87,27 @@ func Combat():
 
 func EndTurn():
 	pass
+
+func EndGame():
+	
+	pass
+func Standby():
+	pass
 	
 func ChangeState(state):
 	
 	match state:
+		"Standby":
+			cState = "Standby"
 		"Main":
+			if(cState == "Combat"):
+				if(Player1Score[0]<=0):
+					ChangeState("EndGame")
+					return
+				elif(Player2Score[0]<=0):
+					ChangeState("EndGame")
+					return
+				pass
 			cState = "Main"
 			Globals.BoardManager.CancelTiles()
 			Globals.Cursor.ToggleCursor(true)
@@ -123,11 +143,26 @@ func ChangeState(state):
 			Globals.UIManager.ToggleSummon(false)
 			UpdateScore(curPhase,0,4,0)
 			Globals.BoardManager.RefreshCards()
+			
 			if curPhase ==1:
 				curPhase = 2
+				Globals.AIManager.turnEnded = false
 			else:
 				curPhase = 1
 				turnCount+=1
 				Globals.UIManager.UpdateTurn(turnCount)
+				
+			if(turnCount == 21):
+				ChangeState("EndGame")
+			Globals.CardManager.FillHands(curPhase)
 			Globals.Camera.CameraShift(curPhase)
+		"EndGame":
+			cState = "EndGame"
+			##TODO Show some animation first
+			GameplayObject.queue_free()
+			GameplayObject = null
+			GameplayObject = preload("res://Objects/main_menu.tscn").instantiate()
+			add_child(GameplayObject)
+			ChangeState("Standby")
+			
 			

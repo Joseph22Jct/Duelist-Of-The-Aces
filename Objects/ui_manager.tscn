@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://cdbjt1ss1obq2"]
+[gd_scene load_steps=14 format=3 uid="uid://cdbjt1ss1obq2"]
 
 [ext_resource type="Script" path="res://Scripts/UIManager.gd" id="1_1gmat"]
 [ext_resource type="Texture2D" uid="uid://b7yaht6kautop" path="res://Sprites/UI/Scores3.png" id="2_3514e"]
@@ -9,6 +9,8 @@
 [ext_resource type="Texture2D" uid="uid://cwk8wot322s6g" path="res://Sprites/bonuses1.png" id="6_jaoin"]
 [ext_resource type="Texture2D" uid="uid://bqjtr3082mama" path="res://Sprites/bonuses2.png" id="7_3py48"]
 [ext_resource type="Texture2D" uid="uid://cy3n6qppy5s5a" path="res://Sprites/Cards/turnHolder.png" id="9_0wgsm"]
+[ext_resource type="Texture2D" uid="uid://vpahwi5y0vus" path="res://Sprites/UI/Scores4.png" id="10_ix7ah"]
+[ext_resource type="Texture2D" uid="uid://bvy1jsa4b2xk6" path="res://Sprites/UI/icons1.png" id="11_u1uqb"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4p8jf"]
 
@@ -263,5 +265,110 @@ theme_override_constants/outline_size = 4
 theme_override_fonts/font = ExtResource("4_1tqer")
 theme_override_font_sizes/font_size = 16
 text = "01"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BoardInfo" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Terrain" type="Control" parent="BoardInfo"]
+anchors_preset = 0
+offset_top = 560.0
+offset_right = 40.0
+offset_bottom = 600.0
+
+[node name="Sprite2D" type="Sprite2D" parent="BoardInfo/Terrain"]
+material = SubResource("ShaderMaterial_4p8jf")
+position = Vector2(125, 80)
+scale = Vector2(2, 2)
+texture = ExtResource("2_3514e")
+
+[node name="Border" type="TextureRect" parent="BoardInfo/Terrain"]
+material = SubResource("ShaderMaterial_sk5kr")
+offset_right = 125.0
+offset_bottom = 80.0
+scale = Vector2(2, 2)
+texture = ExtResource("10_ix7ah")
+
+[node name="Text" type="Label" parent="BoardInfo/Terrain"]
+offset_left = 3.0
+offset_top = 1.0
+offset_right = 244.0
+offset_bottom = 92.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 12
+theme_override_fonts/font = ExtResource("4_1tqer")
+theme_override_font_sizes/font_size = 40
+text = "Terrain:"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Type" type="Label" parent="BoardInfo/Terrain"]
+offset_left = 3.0
+offset_top = 66.0
+offset_right = 244.0
+offset_bottom = 157.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 12
+theme_override_fonts/font = ExtResource("4_1tqer")
+theme_override_font_sizes/font_size = 40
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CardInfo" type="Control" parent="BoardInfo"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 1030.0
+offset_top = 560.0
+offset_right = 1070.0
+offset_bottom = 600.0
+
+[node name="Sprite2D" type="Sprite2D" parent="BoardInfo/CardInfo"]
+material = SubResource("ShaderMaterial_4p8jf")
+position = Vector2(125, 80)
+scale = Vector2(2, 2)
+texture = ExtResource("2_3514e")
+
+[node name="Border" type="TextureRect" parent="BoardInfo/CardInfo"]
+material = SubResource("ShaderMaterial_sk5kr")
+offset_right = 125.0
+offset_bottom = 80.0
+scale = Vector2(2, 2)
+texture = ExtResource("10_ix7ah")
+
+[node name="Text" type="Label" parent="BoardInfo/CardInfo"]
+offset_left = 3.0
+offset_top = 1.0
+offset_right = 244.0
+offset_bottom = 92.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 12
+theme_override_fonts/font = ExtResource("4_1tqer")
+theme_override_font_sizes/font_size = 40
+text = "Card: "
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Icon" type="TextureRect" parent="BoardInfo/CardInfo"]
+layout_mode = 0
+offset_left = 128.0
+offset_top = 64.0
+offset_right = 168.0
+offset_bottom = 104.0
+scale = Vector2(2, 2)
+texture = ExtResource("11_u1uqb")
+
+[node name="Number" type="Label" parent="BoardInfo/CardInfo"]
+offset_left = 4.0
+offset_top = 68.0
+offset_right = 165.0
+offset_bottom = 159.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 12
+theme_override_fonts/font = ExtResource("4_1tqer")
+theme_override_font_sizes/font_size = 40
+text = "0"
 horizontal_alignment = 1
 vertical_alignment = 1
