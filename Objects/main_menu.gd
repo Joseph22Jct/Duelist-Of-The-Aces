@@ -83,6 +83,8 @@ func Confirm():
 		var GO = GameObject.instantiate()
 		GameManager.add_child(GO)
 		GameManager.GameplayObject = GO
+		GameManager.Player1Score = [30,8,0]
+		GameManager.Player2Score = [30,8,0]
 		await get_tree().process_frame
 		GameManager.ChangeState("Main")
 		

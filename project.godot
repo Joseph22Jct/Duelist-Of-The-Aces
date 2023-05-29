@@ -10,10 +10,11 @@ config_version=5
 
 [application]
 
-config/name="Duelist-Of-The-Aces"
+config/name="Duelist of the Aces"
 run/main_scene="res://Objects/main_menu.tscn"
 config/features=PackedStringArray("4.0", "Forward Plus")
-config/icon="res://icon.svg"
+boot_splash/image="res://Sprites/Logo.png"
+config/icon="res://Sprites/SummonIcon1.png"
 
 [autoload]
 
@@ -25,6 +26,7 @@ SoundM="*res://Objects/sound_manager.tscn"
 
 window/size/viewport_width=1280
 window/size/viewport_height=720
+window/size/resizable=false
 
 [input]
 
@@ -86,4 +88,5 @@ Start={
 textures/default_filters/use_nearest_mipmap_filter=true
 textures/decals/filter=0
 textures/light_projectors/filter=0
+environment/defaults/default_clear_color=Color(0, 0, 0, 1)
 textures/canvas_textures/default_texture_filter=0

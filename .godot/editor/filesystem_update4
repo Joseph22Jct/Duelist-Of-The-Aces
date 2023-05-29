@@ -13,3 +13,4 @@ res://Objects/AIManager.gd
 res://Scripts/GameManager.gd
 res://Scripts/Pathfinder.gd
 res://Scripts/UIManager.gd
+res://Objects/main_menu.gd

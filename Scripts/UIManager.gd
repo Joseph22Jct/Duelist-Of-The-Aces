@@ -530,7 +530,7 @@ func UpdateTerrainInfo(pos):
 	pass
 
 func Celebrate(which):
-	var tween = get_tree().create_tween()
+	
 	var win = preload("res://Sprites/FinishStates1.png")
 	var loss = preload("res://Sprites/FinishStates2.png")
 	if(which == -1):
@@ -538,6 +538,9 @@ func Celebrate(which):
 	else:
 		$WinLoss.texture = win
 	Globals.SoundManager.PlaySoundEffect("BattleOver")
-	tween.tween_property($WinLoss, "position", Vector2(258,0),3)
+	var tween = get_tree().create_tween()
+	tween.tween_property($WinLoss, "position", Vector2(258,-100),1)
+	tween = get_tree().create_tween()
+	tween.tween_property($WinLoss, "position", Vector2(258,-100),3)
 	tween.tween_callback(GameManager.FinishAll)
 	pass
