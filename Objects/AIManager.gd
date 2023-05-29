@@ -9,6 +9,7 @@ var CooldownForActions = 0.3
 var InitialWait = 1.6
 var turnEnded = false
 var LastSummonLength = 0
+var BattleWaitTime = 0
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	BM = Globals.BoardManager
@@ -181,13 +182,18 @@ func ProcessNextMove():
 				var targets = []
 				for y in pieces:
 					if y.POwner!=GameManager.curPhase:
-						targets.append(pieces)
+						targets.append(y)
 				for y in targets:
-					if (y.flipped == true and y.number+2<x.number) or (y.flipped == false):
+					if (y.flipped == true and y.Piece.number+2<x.number ) or (y.flipped == false):
 						Data2.append("Flip")
 						var path = Pathfind.Pathfind(x.BPos, y.BPos)
 						path.pop_at(0)
-						Data2.append(path)
+						if(len(path)==2):
+							Data2.append([path[0]])
+							Data2.append([path[1]])
+						else:
+							Data2.append([path[0]])
+						BattleWaitTime = 6
 						
 						break
 				if(targets==0):
@@ -198,15 +204,17 @@ func ProcessNextMove():
 				var targets = []
 				for y in pieces:
 					if y.Piece.POwner!=GameManager.curPhase:
-						targets.append(pieces)
-				for y in targets[0]:
-					if (y.flipped == true and y.number+2<x.number) or (y.flipped == false):
-						Data2.append("Flip")
-						var path = Pathfind.Pathfind(x.BPos, y.BPos)
-						path.pop_at(0)
-						Data2.append(path)
-						
-						break
+						targets.append(y)
+				for y in targets:
+					
+						if (y.Piece.flipped == true and y.Piece.number+2<x.number) or (y.Piece.flipped == false):
+							Data2.append("Flip")
+							var path = Pathfind.Pathfind(x.BPos, y.BPos)
+							path.pop_at(0)
+							if(path!=[]):
+								Data2.append(path[0])
+							BattleWaitTime = 6
+							break
 				if(len(targets)==0):
 					Data2.append(Pathfind.Pathfind(x.BPos, BM.P1LeaderPiece.BPos)[1])
 			Data2.append("Confirm")
@@ -299,6 +307,8 @@ func ExecuteActions():
 							pass
 			pass
 			ActionQueue.pop_at(0)
+			await get_tree().create_timer(BattleWaitTime).timeout
+			BattleWaitTime = 0
 			pass
 		elif(ActionQueue[0].Action == "Summon"):
 			for x in range(len(ActionQueue[0].Data)):

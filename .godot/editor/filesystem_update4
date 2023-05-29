@@ -10,9 +10,6 @@ res://Sprites/cursor_blend.tscn
 res://Objects/main_menu.tscn
 res://Objects/board_tile.tscn
 res://Objects/AIManager.gd
-res://Scripts/UIManager.gd
-res://Scripts/BoardManager.gd
-res://Scripts/CardPiece.gd
-res://Scripts/CardManager.gd
 res://Scripts/GameManager.gd
 res://Scripts/Pathfinder.gd
+res://Scripts/UIManager.gd

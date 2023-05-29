@@ -1,8 +1,8 @@
 extends Node3D
 
 var cState = "Standby"
-var Player1Score = [20,8,0]
-var Player2Score = [20,8,0]
+var Player1Score = [1,8,0]
+var Player2Score = [1,8,0]
 var turnCount = 1
 var curPhase = 1
 var MainMenuObject

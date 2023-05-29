@@ -539,5 +539,5 @@ func Celebrate(which):
 		$WinLoss.texture = win
 	Globals.SoundManager.PlaySoundEffect("BattleOver")
 	tween.tween_property($WinLoss, "position", Vector2(258,0),3)
-	tween.tween_callback(GameManager.FinishAll())
+	tween.tween_callback(GameManager.FinishAll)
 	pass
