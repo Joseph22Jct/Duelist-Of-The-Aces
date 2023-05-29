@@ -67,9 +67,11 @@ func ProcessNextMove():
 			var path2 = []
 			path2.append("Confirm")
 			
-			var foo = Pathfind.Pathfind(BM.P2LeaderPiece.BPos, BM.P1LeaderPiece.BPos).slice(1,1)
-			print(foo)
-			path2.append(foo)
+			var foo = Pathfind.Pathfind(BM.P2LeaderPiece.BPos, BM.P1LeaderPiece.BPos)
+			print(foo[1])
+			if(BM.Map[foo[1][0]][foo[1][1]].Piece== null):
+				print(BM.Map[foo[1][0]][foo[1][1]].Piece)
+				path2.append(foo[1])
 			path2.append("Confirm")
 			print(path2)
 			var Action2 : AIAction = AIAction.new()
@@ -170,7 +172,7 @@ func ProcessNextMove():
 			Action.Data.pop_at(0)
 			ActionQueue.append(Action)
 			var Action2 = AIAction.new()
-			Action.Action = "MoveCard"
+			Action2.Action = "MoveCard"
 			var Data2 = []
 			Data2.append("Confirm")
 			
@@ -188,14 +190,16 @@ func ProcessNextMove():
 						Data2.append(path)
 						
 						break
-				Data2.append("Confirm")
+				if(targets==0):
+					Data2.append(Pathfind.Pathfind(x.BPos, BM.P1LeaderPiece.BPos)[1])
+				
 			else:
 				var pieces = BM.GetPiecesWithinSpaces(x.BPos, 1)
 				var targets = []
 				for y in pieces:
 					if y.Piece.POwner!=GameManager.curPhase:
 						targets.append(pieces)
-				for y in targets:
+				for y in targets[0]:
 					if (y.flipped == true and y.number+2<x.number) or (y.flipped == false):
 						Data2.append("Flip")
 						var path = Pathfind.Pathfind(x.BPos, y.BPos)
@@ -203,6 +207,9 @@ func ProcessNextMove():
 						Data2.append(path)
 						
 						break
+				if(len(targets)==0):
+					Data2.append(Pathfind.Pathfind(x.BPos, BM.P1LeaderPiece.BPos)[1])
+			Data2.append("Confirm")
 			Action2.Data = Data2
 			ActionQueue.append(Action2)	
 		pass
@@ -217,6 +224,7 @@ func ProcessNextMove():
 		ExecuteActions()
 	pass
 # Called every frame. 'delta' is the elapsed time since the previous frame.
+@warning_ignore("unused_parameter")
 func _process(delta):
 	if(turnEnded == true):
 		ActionQueue = []
@@ -285,7 +293,7 @@ func ExecuteActions():
 							Cursor.Confirm()
 							ActionQueue[0].Data.pop_at(0)
 							pass
-						if(ActionQueue[0].Data[0] == "Flip"):
+						elif(ActionQueue[0].Data[0] == "Flip"):
 							Cursor.Flip()
 							ActionQueue[0].Data.pop_at(0)
 							pass

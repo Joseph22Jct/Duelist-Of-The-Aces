@@ -37,15 +37,37 @@ func SetBoard():
 			for x in range(7):
 				Map[3][x].SetType(0)
 		1:
-			Map[3][3].SetType(2)
+			for x in range(7):
+				for y in range(7):
+					Map[x][y].SetType(x)
 		2:
-			Map[3][3].SetType(1)
+			for x in range(7):
+				Map[x][0].SetType(2) 
+				Map[x][2].SetType(2) 
+				Map[x][4].SetType(2) 
+				Map[x][6].SetType(2) 
+				Map[x][1].SetType(1) 
+				Map[x][3].SetType(1)
+				Map[x][5].SetType(1)  
 		3:
-			Map[3][3].SetType(2)
+			for x in range(7):
+				for y in range(7):
+					
+					Map[x][y].SetType((x+y)/2)
 		4:
-			Map[3][3].SetType(1)
+			for x in range(7):
+				Map[0][x].SetType(2) 
+				Map[2][x].SetType(2) 
+				Map[4][x].SetType(2) 
+				Map[6][x].SetType(2) 
+				Map[1][x].SetType(1) 
+				Map[3][x].SetType(1)
+				Map[5][x].SetType(1)  
 		5:
-			Map[3][3].SetType(2)
+			for x in range(7):
+				for y in range(7):
+					randomize()
+					Map[x][y].SetType(randi_range(0,6))
 
 func _ready():
 	Globals.BoardManager = self
@@ -59,12 +81,28 @@ func _ready():
 			BT.BPos = [x,y]
 			
 	SetBoard()
-	P1LeaderPiece = CardP.instantiate()
-	Map[3][6].Piece = P1LeaderPiece
-	P1LeaderPiece.SetUp(0,0,1,[3,6])
-	P2LeaderPiece = CardP.instantiate()
-	Map[3][0].Piece = P2LeaderPiece
-	P2LeaderPiece.SetUp(0,0,2,[3,0])
+	
+	await get_tree().process_frame
+	var MC1 = CardBase.new()
+	MC1.number = 0
+	MC1.type = 0
+	var MC2 = CardBase.new()
+	MC2.number = 0
+	MC2.type = 0
+	Globals.CardManager.SummonCard([3,6],MC1,1)
+	Globals.CardManager.SummonCard([3,0],MC2,2)
+	var ch = Globals.CardManager.PieceHolder.get_children()
+	print(ch)
+	P1LeaderPiece = ch[0]
+	P2LeaderPiece = ch[1]
+	P1LeaderPiece.ToggleWait(false)
+	P2LeaderPiece.ToggleWait(false)
+#	P1LeaderPiece = CardP.instantiate()
+#	#Map[3][6].Piece = P1LeaderPiece
+#	P1LeaderPiece.SetUp(0,0,1,[3,6])
+#	P2LeaderPiece = CardP.instantiate()
+#	#Map[3][0].Piece = P2LeaderPiece
+#	P2LeaderPiece.SetUp(0,0,2,[3,0])
 	$CardPieces.add_child(P1LeaderPiece)
 	$CardPieces.add_child(P2LeaderPiece)
 	await get_tree().process_frame
@@ -111,6 +149,7 @@ func MovePiece(PieceTile, newPos):
 		piece.CardObj.position = Vector3.ZERO
 	print("Code reached")
 	piece.ToggleWait(true)
+	print("Hey")
 	
 	pass
 	

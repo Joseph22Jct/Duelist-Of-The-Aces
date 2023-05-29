@@ -157,12 +157,35 @@ func ChangeState(state):
 			Globals.CardManager.FillHands(curPhase)
 			Globals.Camera.CameraShift(curPhase)
 		"EndGame":
+			
+			var winner = DetermineWinner()
 			cState = "EndGame"
+			Globals.UIManager.Celebrate(winner)
 			##TODO Show some animation first
-			GameplayObject.queue_free()
-			GameplayObject = null
-			GameplayObject = preload("res://Objects/main_menu.tscn").instantiate()
-			add_child(GameplayObject)
-			ChangeState("Standby")
 			
 			
+func DetermineWinner():
+	if(Player1Score[0] <0):
+		return -1
+	elif(Player2Score[0]<0):
+		return 1
+	
+	var pieces = Globals.CardManager.PieceHolder.get_children()
+	var curP1 = 0
+	var curP2 = 0
+	for x in pieces:
+		if x.POwner==1:
+			curP1+=1
+		else:
+			curP2+=1
+	if (curP1>curP2):
+		return 1
+	else:
+		return -1
+
+func FinishAll():
+	GameplayObject.queue_free()
+	GameplayObject = null
+	GameplayObject = preload("res://Objects/main_menu.tscn").instantiate()
+	add_child(GameplayObject)
+	ChangeState("Standby")

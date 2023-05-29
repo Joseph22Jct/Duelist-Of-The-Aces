@@ -381,6 +381,8 @@ func FuseCards():
 func SpawnFusedCard():
 	Cards.get_children()[0].queue_free()
 	var newCard = Globals.CardManager.SpawnCard(FusedCard)
+	if(GameManager.curPhase!=1):
+		newCard.hideObj.visible = true
 	Cards.add_child(newCard)
 	newCard.position = Vector3(3,0.4,0.1)
 	newCard.rotation_degrees = Vector3(90,-180,0)
@@ -525,4 +527,17 @@ func UpdateTerrainInfo(pos):
 	else:
 		$BoardInfo/CardInfo/Icon.visible = false
 		$BoardInfo/CardInfo/Number.visible = false
+	pass
+
+func Celebrate(which):
+	var tween = get_tree().create_tween()
+	var win = preload("res://Sprites/FinishStates1.png")
+	var loss = preload("res://Sprites/FinishStates2.png")
+	if(which == -1):
+		$WinLoss.texture = loss
+	else:
+		$WinLoss.texture = win
+	Globals.SoundManager.PlaySoundEffect("BattleOver")
+	tween.tween_property($WinLoss, "position", Vector2(258,0),3)
+	tween.tween_callback(GameManager.FinishAll())
 	pass

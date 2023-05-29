@@ -11,7 +11,7 @@ func _ready():
 func Pathfind(start, finish):
 	if(start == finish):
 		return []
-	var cur = start ##[0,0]
+	var cur = start.duplicate() ##[0,0]
 	var path = [cur.duplicate()]
 	var xAdd = sign(finish[0] - start[0])
 	var yAdd = sign(finish[1]- start[1])

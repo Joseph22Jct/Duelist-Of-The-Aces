@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://cdbjt1ss1obq2"]
+[gd_scene load_steps=15 format=3 uid="uid://cdbjt1ss1obq2"]
 
 [ext_resource type="Script" path="res://Scripts/UIManager.gd" id="1_1gmat"]
 [ext_resource type="Texture2D" uid="uid://b7yaht6kautop" path="res://Sprites/UI/Scores3.png" id="2_3514e"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://cy3n6qppy5s5a" path="res://Sprites/Cards/turnHolder.png" id="9_0wgsm"]
 [ext_resource type="Texture2D" uid="uid://vpahwi5y0vus" path="res://Sprites/UI/Scores4.png" id="10_ix7ah"]
 [ext_resource type="Texture2D" uid="uid://bvy1jsa4b2xk6" path="res://Sprites/UI/icons1.png" id="11_u1uqb"]
+[ext_resource type="Texture2D" uid="uid://dsnik3e47g8d0" path="res://Sprites/FinishStates1.png" id="12_awg7e"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4p8jf"]
 
@@ -169,6 +170,7 @@ theme_override_fonts/font = ExtResource("4_1tqer")
 text = "20"
 
 [node name="Summoned" type="TextureRect" parent="Scores/ScoreP2/Scores"]
+layout_mode = 0
 offset_left = 184.0
 offset_top = 162.0
 offset_right = 248.0
@@ -287,12 +289,14 @@ texture = ExtResource("2_3514e")
 
 [node name="Border" type="TextureRect" parent="BoardInfo/Terrain"]
 material = SubResource("ShaderMaterial_sk5kr")
+layout_mode = 0
 offset_right = 125.0
 offset_bottom = 80.0
 scale = Vector2(2, 2)
 texture = ExtResource("10_ix7ah")
 
 [node name="Text" type="Label" parent="BoardInfo/Terrain"]
+layout_mode = 0
 offset_left = 3.0
 offset_top = 1.0
 offset_right = 244.0
@@ -306,6 +310,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Type" type="Label" parent="BoardInfo/Terrain"]
+layout_mode = 0
 offset_left = 3.0
 offset_top = 66.0
 offset_right = 244.0
@@ -333,12 +338,14 @@ texture = ExtResource("2_3514e")
 
 [node name="Border" type="TextureRect" parent="BoardInfo/CardInfo"]
 material = SubResource("ShaderMaterial_sk5kr")
+layout_mode = 0
 offset_right = 125.0
 offset_bottom = 80.0
 scale = Vector2(2, 2)
 texture = ExtResource("10_ix7ah")
 
 [node name="Text" type="Label" parent="BoardInfo/CardInfo"]
+layout_mode = 0
 offset_left = 3.0
 offset_top = 1.0
 offset_right = 244.0
@@ -361,6 +368,7 @@ scale = Vector2(2, 2)
 texture = ExtResource("11_u1uqb")
 
 [node name="Number" type="Label" parent="BoardInfo/CardInfo"]
+layout_mode = 0
 offset_left = 4.0
 offset_top = 68.0
 offset_right = 165.0
@@ -372,3 +380,12 @@ theme_override_font_sizes/font_size = 40
 text = "0"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="WinLoss" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 258.0
+offset_top = -402.0
+offset_right = 458.0
+offset_bottom = -302.0
+scale = Vector2(4, 4)
+texture = ExtResource("12_awg7e")

@@ -21,6 +21,7 @@ func SetUp(typ, val, own, pos):
 	number = val
 	POwner = own
 	BPos = pos
+	
 	if(POwner == 1):
 		rotOffset = Vector3(0,0,0)
 		$Border.get_surface_override_material(0).set_shader_parameter("Texture", P1Border)

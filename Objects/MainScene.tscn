@@ -43,7 +43,6 @@ script = ExtResource("19_wkqhb")
 [node name="CardPieces" type="Node3D" parent="BoardManager"]
 
 [node name="Camera" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 script = ExtResource("6_lhvja")
 
 [node name="Camera" type="Camera3D" parent="Camera"]

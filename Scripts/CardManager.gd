@@ -167,12 +167,13 @@ func SummonCard(pos, C:CardBase = null, which = GameManager.curPhase): ##Type 0 
 	curPiece.position = BM.Map[pos[0]][pos[1]].position
 	curCard.position =Vector3(0,10,0)
 	BM.Map[pos[0]][pos[1]].Piece = curPiece 
+	
 	var tween = create_tween()
 	tween.tween_property(curPiece, "position", Vector3(curPiece.position.x, 1.058, curPiece.position.z), 0.6)
 	var tween2 = create_tween()
 	tween2.tween_property(curCard, "position", Vector3.ZERO, 0.6)
 	await tween.finished
-	
+	return curPiece
 	
 	
 	

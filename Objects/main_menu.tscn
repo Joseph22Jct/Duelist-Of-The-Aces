@@ -77,6 +77,7 @@ offset_right = 1283.0
 offset_bottom = 689.0
 
 [node name="FightCPU" type="Label" parent="MenuOptions"]
+layout_mode = 0
 offset_left = 433.0
 offset_top = 50.0
 offset_right = 846.0
@@ -90,6 +91,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Tutorial" type="Label" parent="MenuOptions"]
+layout_mode = 0
 offset_left = 433.0
 offset_top = 151.0
 offset_right = 847.0
@@ -129,6 +131,7 @@ scale = Vector2(2, 2)
 texture = ExtResource("6_2t8rf")
 
 [node name="PressAnyButtonText" type="Label" parent="FightCPUOptions/Board1"]
+layout_mode = 0
 offset_left = 69.0
 offset_top = 11.0
 offset_right = 143.0
@@ -143,6 +146,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Board2" type="TextureRect" parent="FightCPUOptions"]
+layout_mode = 0
 offset_left = 236.0
 offset_top = 568.0
 offset_right = 300.0
@@ -151,6 +155,7 @@ scale = Vector2(2, 2)
 texture = ExtResource("7_t6wqg")
 
 [node name="PressAnyButtonText" type="Label" parent="FightCPUOptions/Board2"]
+layout_mode = 0
 offset_left = 69.0
 offset_top = 11.0
 offset_right = 143.0
@@ -164,6 +169,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Board3" type="TextureRect" parent="FightCPUOptions"]
+layout_mode = 0
 offset_left = 501.0
 offset_top = 408.0
 offset_right = 565.0
@@ -172,6 +178,7 @@ scale = Vector2(2, 2)
 texture = ExtResource("8_ltqc2")
 
 [node name="PressAnyButtonText" type="Label" parent="FightCPUOptions/Board3"]
+layout_mode = 0
 offset_left = 69.0
 offset_top = 11.0
 offset_right = 143.0
@@ -185,6 +192,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Board4" type="TextureRect" parent="FightCPUOptions"]
+layout_mode = 0
 offset_left = 611.0
 offset_top = 569.0
 offset_right = 675.0
@@ -193,6 +201,7 @@ scale = Vector2(2, 2)
 texture = ExtResource("9_g5qnc")
 
 [node name="PressAnyButtonText" type="Label" parent="FightCPUOptions/Board4"]
+layout_mode = 0
 offset_left = 69.0
 offset_top = 11.0
 offset_right = 143.0
@@ -207,6 +216,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Board5" type="TextureRect" parent="FightCPUOptions"]
+layout_mode = 0
 offset_left = 874.0
 offset_top = 408.0
 offset_right = 938.0
@@ -215,6 +225,7 @@ scale = Vector2(2, 2)
 texture = ExtResource("10_u72qc")
 
 [node name="PressAnyButtonText" type="Label" parent="FightCPUOptions/Board5"]
+layout_mode = 0
 offset_left = 69.0
 offset_top = 11.0
 offset_right = 143.0
@@ -229,6 +240,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Board6" type="TextureRect" parent="FightCPUOptions"]
+layout_mode = 0
 offset_left = 981.0
 offset_top = 570.0
 offset_right = 1045.0
@@ -237,6 +249,7 @@ scale = Vector2(2, 2)
 texture = ExtResource("11_ua7ww")
 
 [node name="PressAnyButtonText" type="Label" parent="FightCPUOptions/Board6"]
+layout_mode = 0
 offset_left = 69.0
 offset_top = 11.0
 offset_right = 143.0
@@ -250,6 +263,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Selection" type="TextureRect" parent="FightCPUOptions"]
+layout_mode = 0
 offset_left = 30.0
 offset_top = 440.0
 offset_right = 70.0
@@ -274,6 +288,7 @@ scale = Vector2(6, 6)
 texture = ExtResource("12_uq0fm")
 
 [node name="PressAnyButtonText" type="Label" parent="Tutorial/TextureRect"]
+layout_mode = 0
 offset_left = 3.0
 offset_top = 2.0
 offset_right = 667.0
