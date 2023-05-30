@@ -1,9 +1,9 @@
+Camera3D
 TextureRect
 Node3D
 Control
 Label
 MeshInstance3D
-Camera3D
 AudioStreamPlayer
 AudioStreamPlayer3D
 Sprite2D

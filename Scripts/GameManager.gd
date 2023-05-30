@@ -16,6 +16,7 @@ func GetCurPhaseAP():
 	else:
 		return Player2Score[1] 
 func UpdateScore(which, Health = null, AP = null, Deck = null):
+	
 	if which ==1:
 		if(Health!=null):
 			Player1Score[0]+=Health

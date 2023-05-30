@@ -72,7 +72,7 @@ func Fuse(base, other):
 	var FusedCard:CardBase = CardBase.new()
 	
 	FusedCard.type = base.type
-	FusedCard.number = int(((base.number + other.number) /2)+0.6)
+	FusedCard.number = int(((base.number + other.number) /2)+0.9)
 		
 	return FusedCard
 	pass

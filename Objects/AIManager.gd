@@ -47,7 +47,7 @@ func ProcessNextMove():
 			CardsYetToMove = true
 		
 	
-	if(BM.P2LeaderPiece.waited == false):
+	if(BM.P2LeaderPiece.waited == false and len(Pathfind.Pathfind(BM.P2LeaderPiece.BPos,[0,0])) != 1):
 		##Move cursor towards Piece
 		var path = Pathfind.Pathfind(Cursor.curPos,BM.P2LeaderPiece.BPos)
 		
@@ -129,7 +129,8 @@ func ProcessNextMove():
 		Act2.Action = "SummonUI"
 		var data2 = []
 		randomize()
-		var fuseAmount = randi_range(0, len(curHand)-1)
+		var fuseAmount = randi_range(1, len(curHand)-1)
+		fuseAmount = randi_range(1, fuseAmount)
 		var fuseCardSlots = []
 		for y in fuseAmount:
 			var smallest = 99
@@ -181,10 +182,10 @@ func ProcessNextMove():
 				var pieces = BM.GetPiecesWithinSpaces(x.BPos, 2)
 				var targets = []
 				for y in pieces:
-					if y.POwner!=GameManager.curPhase:
+					if y.Piece.POwner!=GameManager.curPhase:
 						targets.append(y)
 				for y in targets:
-					if (y.flipped == true and y.Piece.number+2<x.number ) or (y.flipped == false):
+					if (y.Piece.flipped == true and y.Piece.number+2<x.number ) or (y.Piece.flipped == false) or (x.number == 1):
 						Data2.append("Flip")
 						var path = Pathfind.Pathfind(x.BPos, y.BPos)
 						path.pop_at(0)
@@ -196,7 +197,7 @@ func ProcessNextMove():
 						BattleWaitTime = 6
 						
 						break
-				if(targets==0):
+				if(len(targets)==0):
 					Data2.append(Pathfind.Pathfind(x.BPos, BM.P1LeaderPiece.BPos)[1])
 				
 			else:

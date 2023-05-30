@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://dsqqfxsba7od8"]
+
+[ext_resource type="Texture2D" uid="uid://8t8v2hrwwtyt" path="res://Sprites/skybox.png" id="3_lywvm"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_3pcic"]
+panorama = ExtResource("3_lywvm")
+
+[sub_resource type="Sky" id="Sky_47m0q"]
+sky_material = SubResource("PanoramaSkyMaterial_3pcic")
+
+[sub_resource type="Environment" id="Environment_l51nr"]
+background_mode = 2
+sky = SubResource("Sky_47m0q")
+ambient_light_source = 2
+ambient_light_color = Color(1, 1, 1, 1)
+
+[node name="Node3D" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_l51nr")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.837795, -0.332276, 0.433234, 0, 0.793491, 0.608581, -0.545985, -0.509867, 0.664783, 12.0208, 13.1731, 14.1558)
