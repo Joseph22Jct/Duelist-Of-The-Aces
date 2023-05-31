@@ -1,16 +1,3 @@
-res://Objects/MainScene.tscn
+res://Objects/board_tile.tscn
 res://Sprites/highlight.tres
 res://Sprites/TransparentShader.tres
-res://Objects/card_Piece.tscn
-res://Objects/card.tscn
-res://Objects/cursor_manager.tscn
-res://Objects/sound_manager.tscn
-res://Objects/ui_manager.tscn
-res://Sprites/cursor_blend.tscn
-res://Objects/main_menu.tscn
-res://Objects/board_tile.tscn
-res://Objects/AIManager.gd
-res://Scripts/GameManager.gd
-res://Scripts/Pathfinder.gd
-res://Scripts/UIManager.gd
-res://Objects/main_menu.gd
