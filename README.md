@@ -5,7 +5,7 @@ I made this game with a lot of inspiration from Yugioh! Duelist of the Roses. If
 
 The game was made with Godot and GDScript. Blender to make the 3d models and Aseprite for the textures. I love how the aesthetics ended up looking and it made me a lot more comfortable working on a 3d environment.
 
-[b]Here's how the game works:[/b]
+Here's how the game works:
 
 Your objective is simple, either deplete your foe's life points to 0, or have the most cards on the field after 20 turns.
 
@@ -21,7 +21,7 @@ Fusing is a powerful tool to gain momentum, but you risk using up all your cards
 
 Once its on the field, you have to wait until next turn to use it. However, once you can:
 
--If the card is on a favorable terrain, it can move one extra space if it's flipped up (Let's say, 6 of diamonds: it gains favorable terrain on "Even" terrain and "Diamond" terrain).
+If the card is on a favorable terrain, it can move one extra space if it's flipped up (Let's say, 6 of diamonds: it gains favorable terrain on "Even" terrain and "Diamond" terrain).
 
 This will reveal the card to your opponent, but it allows it to travel much farther per turn.
 
