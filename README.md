@@ -5,6 +5,8 @@ I made this game with a lot of inspiration from Yugioh! Duelist of the Roses. If
 
 The game was made with Godot and GDScript. Blender to make the 3d models and Aseprite for the textures. I love how the aesthetics ended up looking and it made me a lot more comfortable working on a 3d environment.
 
+![dotascrn2](https://github.com/Joseph22Jct/Duelist-Of-The-Aces/assets/66181369/afcffbef-b6c2-4ed8-a40d-386baa7e2a6e)
+
 Here's how the game works:
 
 Your objective is simple, either deplete your foe's life points to 0, or have the most cards on the field after 20 turns.
