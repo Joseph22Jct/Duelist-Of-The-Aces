@@ -154,13 +154,14 @@ func StartFight(init:CardBase, foe:CardBase):
 	$DamageDealt.visible = false
 	
 	if(DamageDealt>0 and GameManager.curPhase == 1):
+		
 		GameManager.UpdateScore(2, -DamageDealt,0,0)
 	elif(DamageDealt>0 and GameManager.curPhase == 2):
 		GameManager.UpdateScore(1, -DamageDealt,0,0)
 	if(DamageDealt<0 and GameManager.curPhase == 1):
-		GameManager.UpdateScore(1, -DamageDealt,0,0)
+		GameManager.UpdateScore(1, DamageDealt,0,0)
 	elif(DamageDealt<0 and GameManager.curPhase == 2):
-		GameManager.UpdateScore(2, -DamageDealt,0,0)
+		GameManager.UpdateScore(2, DamageDealt,0,0)
 	Globals.SoundManager.PlaySoundEffect("Confirm")
 	Globals.BoardManager.FightAftermath(result)
 	#TODO;

@@ -14,12 +14,12 @@
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_l2ouy"]
 panorama = ExtResource("21_flwys")
 
-[sub_resource type="Sky" id="Sky_47m0q"]
+[sub_resource type="Sky" id="Sky_3ne71"]
 sky_material = SubResource("PanoramaSkyMaterial_l2ouy")
 
 [sub_resource type="Environment" id="Environment_6dbpa"]
 background_mode = 2
-sky = SubResource("Sky_47m0q")
+sky = SubResource("Sky_3ne71")
 ambient_light_source = 2
 ambient_light_color = Color(1, 1, 1, 1)
 
